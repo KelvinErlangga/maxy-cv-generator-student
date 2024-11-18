@@ -51,13 +51,15 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center space-x-4">
-                <a href="#" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">
-                    Akun
+                <!-- Mengarahkan ke halaman login -->
+                <a href="{{ route('register') }}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">
+                    Daftar
                 </a>
                 <a href="{{ route('cv.generate') }}" class="bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded hover:bg-blue-600">
                     Buat CV
                 </a>
             </div>
+
         </div>
     </div>
 </nav>
