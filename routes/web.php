@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TemplateCoverLetterController;
+use App\Http\Controllers\TemplateCurriculumVitaeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,30 +43,38 @@ Route::prefix('cv')->group(function () {
     })->name('cv.template');
 });
 
-// Tambahkan route untuk halaman Cover Letter
-Route::prefix('cover-letter')->group(function () {
-    Route::get('generate', function () {
-        return view('cover-letter.generate');
-    })->name('cover-letter.generate');
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
-    Route::get('template', function () {
-        return view('cover-letter.template');
-    })->name('cover-letter.template');
+Route::middleware('auth', 'verified')->group(function () {
+
+    // Route Pelamar
+    Route::middleware('role:pelamar')->group(function () {
+
+        Route::get('/dashboard-pelamar', function () {
+            return view('pelamar.index');
+        })->name('dashboard-pelamar');
+    });
+
+    // Route Perusahaan
+    Route::middleware('role:perusahaan')->group(function () {
+
+        Route::get('/dashboard-perusahaan', function () {
+            return view('perusahaan.index');
+        })->name('dashboard-perusahaan');
+    });
+
+    // Route Admin
+    Route::middleware('role:admin')->group(function () {
+
+        Route::get('/dashboard-admin', function () {
+            return view('admin.index');
+        })->name('dashboard-admin');
+
+        Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
+        Route::resource('template_cover_letter', TemplateCoverLetterController::class);
+        Route::resource('skills', SkillController::class);
+    });
 });
 
-// Tambahkan route untuk halaman dashboard user, company, dan admin
-Route::prefix('dashboard')->group(function () {
-    Route::get('user', function () {
-        return view('dashboard.user');
-    })->middleware(['auth'])->name('dashboard.user');
-
-    Route::get('company', function () {
-        return view('dashboard.company');
-    })->middleware(['auth'])->name('dashboard.company');
-
-    Route::get('admin', function () {
-        return view('dashboard.admin');
-    })->middleware(['auth'])->name('dashboard.admin');
-});
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

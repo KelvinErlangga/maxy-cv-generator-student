@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'google_id',
         'email',
         'password',
     ];
@@ -41,4 +43,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relasi dengan tabel personal pelamar
+    public function personalPelamar()
+    {
+        return $this->belongsTo(PersonalPelamar::class);
+    }
+
+    // relasi dengan table personal company
+    public function personalComapany()
+    {
+        return $this->belongsTo(PersonalCompany::class);
+    }
+
+    //relasi dengan tabel curriculum vitae user
+    public function curriculumVitaeUser()
+    {
+        return $this->hasMany(CurriculumVitaeUser::class);
+    }
+
+    //relasi dengan tabel applicant
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class);
+    }
 }
