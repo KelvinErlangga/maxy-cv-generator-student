@@ -23,19 +23,46 @@ class GoogleController extends Controller
         if ($findUser) {
             Auth::login($findUser);
         } else {
-            $user = User::updateOrCreate([
-                'email' => $user->email,
-            ], [
-                'name' => $user->name,
-                'google_id' => $user->id,
-                'password' => encrypt('123123123')
-            ]);
 
-            $user->assignRole('pelamar');
+            $emailUser = User::where('email', $user->email)->first();
 
-            Auth::login($user);
+            if ($emailUser) {
+                $emailUser->update([
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'google_id' => $user->id
+                ]);
+                Auth::login($emailUser);
+            } else {
+                $newUser = User::create([
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'google_id' => $user->id
+                ]);
+
+                $newUser->assignRole('pelamar');
+
+                Auth::login($newUser);
+            }
         }
 
-        return redirect()->intended(route('dashboard-pelamar'));
+        $loginUser = Auth::user();
+
+        if ($loginUser->hasRole(['pelamar'])) {
+
+            // Jika Role Pelamar akan masuk ke halaman dashboard pelamar
+            return redirect()->intended(route('dashboard-pelamar'));
+        } else if ($loginUser->hasRole(['perusahaan'])) {
+
+            // Jika Role Perusahaan akan masuk ke halaman dashboard perusahaan
+            return redirect()->intended(route('dashboard-perusahaan'));
+        } else if ($loginUser->hasRole(['admin'])) {
+
+            // Jika Role Admin akan masuk ke halaman dashboard admin
+            return redirect()->intended(route('dashboard-admin'));
+        } else {
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['error' => 'Akses tidak diizinkan.']);
+        }
     }
 }

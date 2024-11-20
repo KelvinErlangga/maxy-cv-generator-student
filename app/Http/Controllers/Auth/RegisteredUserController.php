@@ -34,17 +34,18 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'role' => ['required', 'string']
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:13'],
+            'gender' => ['string'],
+            'date_of_birth_pelamar' => ['date'],
+            'name_user_company' => ['string', 'max:255'],
+            'type_of_company' => ['string', 'max:255'],
         ]);
 
         // Jika user memilih role pelamar
-        if ($request->role == 'pelamar') {
-
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
+        if ($request->gender) {
 
             $user = User::create([
                 'name' => $request->name,
@@ -54,19 +55,24 @@ class RegisteredUserController extends Controller
 
             $user->assignRole('pelamar');
 
+            // data personal pelamar
+            $user->personalPelamar()->create([
+                'user_id' => $user->id,
+                'name_pelamar' => $request->name,
+                'email_pelamar' => $request->email,
+                'phone_pelamar' => $request->phone,
+                'city_pelamar' => $request->city,
+                'gender' => $request->gender,
+                'date_of_birth_pelamar' => $request->date_of_birth_pelamar
+            ]);
+
             event(new Registered($user));
 
             Auth::login($user);
 
             return redirect(route('dashboard-pelamar'));
-        } elseif ($request->role == 'perusahaan') {
+        } elseif ($request->type_of_company) {
             // Jika user memilih role perusahaan
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -74,6 +80,17 @@ class RegisteredUserController extends Controller
             ]);
 
             $user->assignRole('perusahaan');
+
+            // data personal perusahaan
+            $user->personalComapany()->create([
+                'user_id' => $user->id,
+                'name_company' => $request->name,
+                'email_company' => $request->email,
+                'phone_company' => $request->phone,
+                'city_company' => $request->city,
+                'type_of_company' => $request->type_of_company,
+                'name_user_company' => $request->name_user_company
+            ]);
 
             event(new Registered($user));
 

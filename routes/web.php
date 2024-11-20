@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TemplateCoverLetterController;
+use App\Http\Controllers\TemplateCurriculumVitaeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +24,7 @@ Route::get('/', function () {
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
 
     // Route Pelamar
     Route::middleware('role:pelamar')->group(function () {
@@ -45,6 +48,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard-admin', function () {
             return view('admin.index');
         })->name('dashboard-admin');
+
+        Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
+        Route::resource('template_cover_letter', TemplateCoverLetterController::class);
+        Route::resource('skills', SkillController::class);
     });
 });
 
