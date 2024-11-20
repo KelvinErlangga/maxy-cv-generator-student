@@ -20,6 +20,22 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
+<<<<<<< HEAD
+            {{-- <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @if (isset($header))
+                        {{ $header }}
+                    @endif
+                </div>
+            </header> --}}
+
+            <!-- Page Content -->
+            <main>
+                @yield('content')
+            </main>
+            @include('layouts.footer')
+=======
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -31,6 +47,7 @@
             <main>
                 {{ $slot }}
             </main>
+>>>>>>> richard-dev
         </div>
     </body>
 </html>
