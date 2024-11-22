@@ -29,7 +29,11 @@
                     required
                     autofocus
                     class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                    style="height: 45px; line-height: 45px; padding: 0 16px" />
+                    style="height: 45px; line-height: 45px; padding: 0 16px"
+                    value="{{old('email')}}" />
+                @error('email')
+                <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                @enderror
             </div>
 
             <!-- Password -->

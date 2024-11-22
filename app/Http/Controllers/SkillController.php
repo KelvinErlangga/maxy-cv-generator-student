@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateSkillRequest;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SkillController extends Controller
 {
@@ -14,7 +16,9 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+        $skills = Skill::getSkill();
+
+        return view('admin.skills.index', compact('skills'));
     }
 
     /**
@@ -24,29 +28,24 @@ class SkillController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.skills.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateSkillRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateSkillRequest $request)
     {
-        //
-    }
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Skill  $skill
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Skill $skill)
-    {
-        //
+            $newSkill = Skill::create($validated);
+        });
+
+        return redirect()->route('admin.skills.index');
     }
 
     /**
@@ -57,19 +56,25 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        //
+        return view('admin.skills.edit', compact('skill'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateSkillRequest  $request
      * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill $skill)
+    public function update(StoreUpdateSkillRequest $request, Skill $skill)
     {
-        //
+        DB::transaction(function () use ($request, $skill) {
+            $validated = $request->validated();
+
+            $skill->update($validated);
+        });
+
+        return redirect()->route('admin.skills.index');
     }
 
     /**
@@ -80,6 +85,10 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        DB::transaction(function () use ($skill) {
+            $skill->delete();
+        });
+
+        return redirect()->route('admin.skills.index');
     }
 }

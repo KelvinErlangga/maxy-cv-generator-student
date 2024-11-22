@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TemplateCoverLetterController;
 use App\Http\Controllers\TemplateCurriculumVitaeController;
+use App\Http\Controllers\UserAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,16 +44,21 @@ Route::middleware('auth', 'verified')->group(function () {
         })->name('dashboard-perusahaan');
     });
 
+
     // Route Admin
-    Route::middleware('role:admin')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
 
-        Route::get('/dashboard-admin', function () {
-            return view('admin.index');
-        })->name('dashboard-admin');
+        Route::middleware('role:admin')->group(function () {
 
-        Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
-        Route::resource('template_cover_letter', TemplateCoverLetterController::class);
-        Route::resource('skills', SkillController::class);
+            Route::get('dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard-admin');
+
+            Route::get('users', [UserAdminController::class, 'index'])->name('users-admin');
+            Route::delete('users/{user}', [UserAdminController::class, 'destroy'])->name('destroy-user-admin');
+
+            Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
+            Route::resource('template_cover_letter', TemplateCoverLetterController::class);
+            Route::resource('skills', SkillController::class);
+        });
     });
 });
 

@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
         } else {
 
             // Jika Role Admin akan masuk ke halaman dashboard admin
-            return redirect()->intended(route('dashboard-admin'));
+            return redirect()->intended(route('admin.dashboard-admin'));
         }
     }
 
