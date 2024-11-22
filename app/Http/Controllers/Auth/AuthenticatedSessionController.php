@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->hasRole(['pelamar'])) {
 
             // Jika Role Pelamar akan masuk ke halaman dashboard pelamar
-            return redirect()->intended(route('dashboard-pelamar'));
+            return redirect()->intended(route('home'));
         } else if ($user->hasRole(['perusahaan'])) {
 
             // Jika Role Perusahaan akan masuk ke halaman dashboard perusahaan

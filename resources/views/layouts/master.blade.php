@@ -150,8 +150,6 @@
         </div>
     </footer>
 
-    @stack('scripts')
-
     <script>
         // Toggle visibility of dropdowns
         function toggleDropdown(buttonId, menuId) {
@@ -188,7 +186,7 @@
         toggleDropdown("about-dropdown-btn", "about-dropdown-menu");
     </script>
 
-
+    @stack('scripts')
 
 </body>
 

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
@@ -29,12 +29,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::middleware('auth', 'verified')->group(function () {
 
     // Route Pelamar
-    Route::middleware('role:pelamar')->group(function () {
-
-        Route::get('/dashboard-pelamar', function () {
-            return view('pelamar.index');
-        })->name('dashboard-pelamar');
-    });
+    Route::middleware('role:pelamar')->group(function () {});
 
     // Route Perusahaan
     Route::middleware('role:perusahaan')->group(function () {
