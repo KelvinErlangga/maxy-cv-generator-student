@@ -38,11 +38,6 @@ Route::get('/tentang/{section}', function ($section) {
     }
 })->name('tentang');
 
-// Route untuk dashboard
-Route::get('/dashboard', function () {
-    return view('home.index');
-})->middleware(['auth'])->name('dashboard');
-
 // Tambahkan route untuk halaman CV
 Route::prefix('cv')->group(function () {
     Route::get('generate', function () {
