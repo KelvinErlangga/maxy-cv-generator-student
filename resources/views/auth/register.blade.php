@@ -6,13 +6,13 @@
 <!-- Form Pendaftaran -->
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
     <!-- Background Image -->
-    <img src="{{asset('assets/homepage/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
+    <img src="{{asset('images/homepage/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
 
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl z-10">
         <!-- Logo -->
         <div class="flex justify-center mb-6">
             <a href="/">
-                <img src="{{asset('assets/homepage/logo.png')}}" alt="Logo" style="width: 180px; height: auto" />
+                <img src="{{asset('images/homepage/logo.png')}}" alt="Logo" style="width: 180px; height: auto" />
             </a>
         </div>
 

@@ -268,7 +268,6 @@
         </div>
     </section>
 
-    <!-- Testimonial Section -->
     <section class="bg-blue-50 py-16">
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold text-blue-800 mb-12">APA KATA MEREKA</h2>
@@ -351,7 +350,11 @@
                 slidesPerView: 2,
                 spaceBetween: 30,
                 loop: true,
-                autoplay: { delay: 4000 },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false, // Tetap autoplay meskipun disentuh
+                },
+                allowTouchMove: false, // Menonaktifkan interaksi geser
             });
         });
     </script>

@@ -22,15 +22,30 @@ Route::get('/', function () {
     return view('home.index');
 })->name('home');
 
+// Route untuk navbar
+Route::get('/tentang/{section}', function ($section) {
+    switch ($section) {
+        case 'kami':
+            return view('tentang.kami');
+        case 'kontak':
+            return view('tentang.kontak');
+        case 'faq':
+            return view('tentang.faq');
+        default:
+            abort(404);
+    }
+})->name('tentang');
+
+
 // Route untuk welcome
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('home');
 
-// Route untuk dashboard (sudah ada)
+// Route untuk dashboard
 Route::get('/dashboard', function () {
     return view('home.index');
-})->middleware(['auth'])->name('home.index');
+})->middleware(['auth'])->name('dashboard');
 
 // Tambahkan route untuk halaman CV
 Route::prefix('cv')->group(function () {
