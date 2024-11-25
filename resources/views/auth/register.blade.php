@@ -75,7 +75,7 @@
                         style="background-color: #3538cd; color: white; padding: 12px 16px; border-radius: 5px; width: 40%; border: none; transition: background-color 0.3s"
                         onmouseover="this.style.backgroundColor='#2727a1';"
                         onmouseout="this.style.backgroundColor='#3538cd';">
-                        Daftar
+                        Daftar Sebagai Pelamar
                     </button>
                 </div>
             </form>
@@ -130,7 +130,7 @@
                         style="background-color: #3538cd; color: white; padding: 12px 16px; border-radius: 5px; width: 40%; border: none; transition: background-color 0.3s"
                         onmouseover="this.style.backgroundColor='#2727a1';"
                         onmouseout="this.style.backgroundColor='#3538cd';">
-                        Daftar
+                        Daftar Sebagai Perusahaan
                     </button>
                 </div>
             </form>
