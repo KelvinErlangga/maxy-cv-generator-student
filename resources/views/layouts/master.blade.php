@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title')</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/homepage/logo.svg') }}" type="image/png">
     <!-- Tambahkan link font Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
@@ -21,7 +23,7 @@
                 <!-- Logo -->
                 <div class="flex items-center">
                     <a href="/" class="flex items-center">
-                        <img src="{{asset('assets/homepage/logo.png')}}" alt="Logo" class="h-8 w-auto" />
+                        <img src="{{ asset('images/homepage/logo.png') }}" alt="Logo" class="h-8 w-auto" />
                     </a>
                 </div>
 
@@ -66,26 +68,31 @@
                             </svg>
                         </button>
                         <div id="about-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kami</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kontak</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">QNA</a>
+                            <a href="{{ route('tentang', ['section' => 'kami']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kami</a>
+                            <a href="{{ route('tentang', ['section' => 'kontak']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kontak</a>
+                            <a href="{{ route('tentang', ['section' => 'faq']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">FAQ</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-4">
-
                     @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="route('logout')" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                            this.closest('form').submit();">
                             Logout
                         </a>
                     </form>
                     @else
-                    <a href="{{route('login')}}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Login</a>
+                        @if(Route::currentRouteName() === 'login')
+                            <a href="{{ route('register') }}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Daftar</a>
+                        @elseif(Route::currentRouteName() === 'register')
+                            <a href="{{ route('login') }}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Masuk</a>
+                        @else
+                            <a href="{{ route('login') }}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Masuk</a>
+                        @endif
                     @endauth
 
                     <a href="#" class="bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded hover:bg-blue-600">Buat CV</a>
@@ -93,6 +100,7 @@
             </div>
         </div>
     </nav>
+
 
     @yield('content')
 
@@ -126,15 +134,15 @@
                     <h3 class="text-xl font-bold text-blue-600 mb-5">SOCIAL MEDIA</h3>
                     <ul class="space-y-3">
                         <li class="flex items-center space-x-2">
-                            <img src="{{asset('assets/icons/tiktok.svg')}}" alt="TikTok" class="w-5 h-5" />
+                            <img src="{{asset('images/icons/tiktok.svg')}}" alt="TikTok" class="w-5 h-5" />
                             <span class="text-gray-800 hover:text-blue-600">@CVRE_generate</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <img src="{{asset('assets/icons/instagram.svg')}}" alt="Instagram" class="w-5 h-5" />
+                            <img src="{{asset('images/icons/instagram.svg')}}" alt="Instagram" class="w-5 h-5" />
                             <span class="text-gray-800 hover:text-blue-600">@CVRE_generate</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <img src="{{asset('assets/icons/facebook.svg')}}" alt="Facebook" class="w-5 h-5" />
+                            <img src="{{asset('images/icons/facebook.svg')}}" alt="Facebook" class="w-5 h-5" />
                             <span class="text-gray-800 hover:text-blue-600">CVRE Generate</span>
                         </li>
                     </ul>
@@ -143,7 +151,7 @@
 
             <!-- Bagian Kanan (Logo Footer) -->
             <div class="flex justify-end items-center flex-grow">
-                <img src="{{asset('assets/homepage/logo-footer.png')}}" alt="Logo" style="width: 240px; height: auto" />
+                <img src="{{asset('images/homepage/logo-footer.png')}}" alt="Logo" style="width: 240px; height: auto" />
             </div>
         </div>
     </footer>
