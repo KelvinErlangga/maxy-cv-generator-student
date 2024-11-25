@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TemplateCoverLetterController;
 use App\Http\Controllers\TemplateCurriculumVitaeController;
+use App\Http\Controllers\UserAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route untuk homepage
+// Route untuk welcome
 Route::get('/', function () {
-    return view('home.index');
+    return view('homepage');
 })->name('home');
 
 // Route untuk navbar
@@ -35,17 +37,6 @@ Route::get('/tentang/{section}', function ($section) {
             abort(404);
     }
 })->name('tentang');
-
-
-// Route untuk welcome
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('home');
-
-// Route untuk dashboard
-Route::get('/dashboard', function () {
-    return view('home.index');
-})->middleware(['auth'])->name('dashboard');
 
 // Tambahkan route untuk halaman CV
 Route::prefix('cv')->group(function () {
@@ -64,12 +55,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::middleware('auth', 'verified')->group(function () {
 
     // Route Pelamar
-    Route::middleware('role:pelamar')->group(function () {
-
-        Route::get('/dashboard-pelamar', function () {
-            return view('pelamar.index');
-        })->name('dashboard-pelamar');
-    });
+    Route::middleware('role:pelamar')->group(function () {});
 
     // Route Perusahaan
     Route::middleware('role:perusahaan')->group(function () {
@@ -79,16 +65,21 @@ Route::middleware('auth', 'verified')->group(function () {
         })->name('dashboard-perusahaan');
     });
 
+
     // Route Admin
-    Route::middleware('role:admin')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
 
-        Route::get('/dashboard-admin', function () {
-            return view('admin.index');
-        })->name('dashboard-admin');
+        Route::middleware('role:admin')->group(function () {
 
-        Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
-        Route::resource('template_cover_letter', TemplateCoverLetterController::class);
-        Route::resource('skills', SkillController::class);
+            Route::get('dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard-admin');
+
+            Route::get('users', [UserAdminController::class, 'index'])->name('users-admin');
+            Route::delete('users/{user}', [UserAdminController::class, 'destroy'])->name('destroy-user-admin');
+
+            Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
+            Route::resource('template_cover_letter', TemplateCoverLetterController::class);
+            Route::resource('skills', SkillController::class);
+        });
     });
 });
 

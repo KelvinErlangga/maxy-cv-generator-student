@@ -54,18 +54,30 @@
                         <div class="mb-4">
                             <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
                             <input id="email" name="email" type="email" value="{{old('email')}}" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('email')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="nomor-telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
                             <input id="nomor-telepon" name="phone" value="{{old('phone')}}" type="number" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('phone')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <input id="password" name="password" type="password" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('password')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="password-konfirmasi" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                             <input id="password-konfirmasi" name="password_confirmation" type="password" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('password')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -109,18 +121,30 @@
                         <div class="mb-4">
                             <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email Perusahaan</label>
                             <input id="email" name="email" type="email" value="{{old('email')}}" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('email')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="nomor-telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon Perusahaan</label>
                             <input id="nomor-telepon" name="phone" value="{{old('phone')}}" type="number" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('phone')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <input id="password" name="password" type="password" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('password')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="password-konfirmasi" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                             <input id="password-konfirmasi" name="password_confirmation" type="password" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            @error('password')
+                            <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
