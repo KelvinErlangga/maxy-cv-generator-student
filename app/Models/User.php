@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -43,6 +44,22 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // get user role pelamar
+    public static function getUserPelamar()
+    {
+        $users = User::role('pelamar')->get();
+
+        return $users;
+    }
+
+    // get count user pelemar
+    public static function getCountUserPelamar()
+    {
+        $countUsers = User::role('pelamar')->count();
+
+        return $countUsers;
+    }
 
     // relasi dengan tabel personal pelamar
     public function personalPelamar()

@@ -11,12 +11,12 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
 
         $findUser = User::where('google_id', $user->id)->first();
 
@@ -50,8 +50,8 @@ class GoogleController extends Controller
 
         if ($loginUser->hasRole(['pelamar'])) {
 
-            // Jika Role Pelamar akan masuk ke halaman dashboard pelamar
-            return redirect()->intended(route('dashboard-pelamar'));
+            // Jika Role Pelamar akan masuk ke halaman awal
+            return redirect()->intended(route('home'));
         } else if ($loginUser->hasRole(['perusahaan'])) {
 
             // Jika Role Perusahaan akan masuk ke halaman dashboard perusahaan
