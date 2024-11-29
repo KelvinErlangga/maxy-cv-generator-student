@@ -54,7 +54,7 @@
                             <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
                                 Kami menyediakan semua yang kamu butuhkan untuk memulai karier dengan percaya diri. Buat CV dan cover letter yang profesional hanya dalam beberapa langkah mudah.
                             </p>
-                            <a href="{{ route('cv.generate') }}"
+                            <a href="{{ route('cv', ['section' => 'generate']) }}"
                                class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg">
                                 Ciptakan CV
                             </a>
@@ -74,7 +74,7 @@
                             <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
                                 Tak perlu bingung dengan format dan desain. Pilih template, isi data yang diperlukan, dan dokumenmu siap diunduh! Siap untuk melamar pekerjaan dengan dokumen yang sempurna dan profesional.
                             </p>
-                            <a href="{{ route('cv.generate') }}"
+                            <a href="{{ route('cv', ['section' => 'generate']) }}"
                                class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg">
                                 Raih Pekerjaanmu
                             </a>
@@ -94,7 +94,7 @@
                             <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
                                 Jadikan langkah pertamamu menuju karier yang sukses lebih mudah dan percaya diri bersama CVRE Generate! Klik “Buat CV” dan ciptakan CV atau cover letter profesionalmu.
                             </p>
-                            <a href="{{ route('cv.generate') }}"
+                            <a href="{{ route('cv', ['section' => 'generate']) }}"
                                class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg">
                                 Capai Impianmu
                             </a>
@@ -261,7 +261,7 @@
                     Dapatkan pekerjaan impian Anda dengan Cover Letter yang menarik dan efektif.
                     Dengan CVRE Generate, menulis cover letter tidak butuh waktu yang lama dan membingungkan.
                 </p>
-                <a href="{{ route('cv.generate') }}"
+                <a href="{{ route('cover_letter', ['section' => 'generate']) }}"
                    class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg py-3 px-16 rounded-lg shadow-lg">
                     Buat CV
                 </a>

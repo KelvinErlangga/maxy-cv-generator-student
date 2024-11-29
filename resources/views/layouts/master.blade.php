@@ -42,8 +42,8 @@
                             </svg>
                         </button>
                         <div id="cv-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template</a>
+                            <a href="{{ route('cv', ['section' => 'detail_pribadi']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
+                            <a href="{{ route('cv', ['section' => 'template']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template</a>
                         </div>
                     </div>
 
@@ -56,8 +56,8 @@
                             </svg>
                         </button>
                         <div id="cl-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template</a>
+                            <a href="{{ route('cover_letter', ['section' => 'generate']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
+                            <a href="{{ route('cover_letter', ['section' => 'template']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template</a>
                         </div>
                     </div>
 
@@ -102,7 +102,6 @@
             </div>
         </div>
     </nav>
-
 
     @yield('content')
 

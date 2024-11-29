@@ -25,6 +25,7 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.master')
+            @include('layouts.generator')
         </div>
     </body>
 </html>
