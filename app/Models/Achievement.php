@@ -11,6 +11,10 @@ class Achievement extends Model
 
     protected $fillable = [
         'curriculum_vitae_user_id',
-        'desctiption_achievement'
+        'achievement_name',
+        'organizer_achievement',
+        'city_achievement',
+        'description_achievement',
+        'date_achievement'
     ];
 }

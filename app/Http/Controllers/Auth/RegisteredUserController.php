@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
 
             Auth::login($user);
 
-            return redirect(route('dashboard-pelamar'));
+            return redirect(route('home'));
         } elseif ($request->type_of_company) {
             // Jika user memilih role perusahaan
             $user = User::create([

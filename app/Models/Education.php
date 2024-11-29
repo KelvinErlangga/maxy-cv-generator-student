@@ -13,7 +13,15 @@ class Education extends Model
         'curriculum_vitae_user_id',
         'school_name',
         'field_of_study',
+        'city_education',
+        'description_education',
         'start_date',
         'end_date'
     ];
+
+    // relasi curriculum vitae user
+    public function curriculumVitaeUser()
+    {
+        return $this->belongsTo(CurriculumVitaeUser::class);
+    }
 }

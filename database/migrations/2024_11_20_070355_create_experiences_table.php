@@ -18,9 +18,10 @@ class CreateExperiencesTable extends Migration
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
             $table->string('position_experience');
             $table->string('company_experience');
-            $table->text('description_experience');
+            $table->string('city_experience')->nullable();
+            $table->text('description_experience')->nullable();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
