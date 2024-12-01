@@ -16,7 +16,11 @@ class CreateAchievementsTable extends Migration
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
-            $table->text('description_achievement');
+            $table->string('achievement_name');
+            $table->string('organizer_achievement');
+            $table->string('city_achievement')->nullable();
+            $table->text('description_achievement')->nullable();
+            $table->date('date_achievement');
             $table->timestamps();
         });
     }

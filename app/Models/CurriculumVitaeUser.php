@@ -29,7 +29,7 @@ class CurriculumVitaeUser extends Model
     // relasi dengan tabel personal curriculum vitae
     public function personalCurriculumVitae()
     {
-        return $this->belongsTo(PersonalCurriculumVitae::class);
+        return $this->hasOne(PersonalCurriculumVitae::class);
     }
 
     // relasi dengan tabel education
@@ -50,9 +50,27 @@ class CurriculumVitaeUser extends Model
         return $this->hasMany(Language::class);
     }
 
+    // relasi dengan tabel skill
+    public function skills()
+    {
+        return $this->hasMany(SkillUser::class);
+    }
+
+    // relasi dengan tabel organisasi
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
     // relasi dengan tabel achievement
     public function achievements()
     {
         return $this->hasMany(Achievement::class);
+    }
+
+    // relasi dengan tabel social media
+    public function links()
+    {
+        return $this->hasMany(SocialMedia::class);
     }
 }
