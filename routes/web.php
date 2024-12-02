@@ -23,7 +23,7 @@ use Spatie\Permission\Contracts\Role;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('welcome');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
@@ -31,6 +31,10 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::get('/curriculum-vitae/template-curriculum-vitae', [CurriculumVitaeUserController::class, 'index'])->name('pelamar.curriculum_vitae.index');
 
 Route::middleware('auth', 'verified')->group(function () {
+
+    Route::get('/home', function () {
+        return view('welcome');
+    })->name('home');
 
     // Route Pelamar
     Route::middleware('role:pelamar')->group(function () {

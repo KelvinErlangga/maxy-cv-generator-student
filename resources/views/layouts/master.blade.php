@@ -22,14 +22,14 @@
             <div class="flex justify-between h-16 items-center">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="/" class="flex items-center">
+                    <a href="{{route('welcome')}}" class="flex items-center">
                         <img src="{{asset('assets/homepage/logo.png')}}" alt="Logo" class="h-8 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex space-x-8">
-                    <a href="/" class="text-blue-700 font-medium hover:text-blue-500">Beranda</a>
+                    <a href="{{route('welcome')}}" class="text-blue-700 font-medium hover:text-blue-500">Beranda</a>
 
                     <!-- Dropdown Curriculum Vitae -->
                     <div class="relative">
@@ -40,7 +40,7 @@
                             </svg>
                         </button>
                         <div id="cv-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
+                            <a href="{{route('pelamar.curriculum_vitae.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template</a>
                         </div>
                     </div>
