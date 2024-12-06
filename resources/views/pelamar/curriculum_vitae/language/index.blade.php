@@ -48,6 +48,7 @@
         <!-- Swiper Container (Drag and Drop List) -->
         <ul id="language-list" class="space-y-4">
             <!-- Language 1 -->
+            @forelse($curriculumVitaeUser->languages as $language)
             <li class="rounded flex items-center justify-between">
                 <div class="flex items-center space-x-4 w-full">
                     <!-- Drag Icon (Two Lines) -->
@@ -61,7 +62,7 @@
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div class="col-span-1">
                             <select name="language_name[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" required>
-                                <option value="" disabled selected>Pilih Bahasa</option>
+                                <option value="{{$language->language_name}}">{{$language->language_name}}</option>
                                 <option value="Indonesia">Indonesia</option>
                                 <option value="Inggris">Inggris</option>
                                 <option value="Mandarin">Mandarin</option>
@@ -72,6 +73,47 @@
                         </div>
                         <div class="col-span-1">
                             <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" required>
+                                <option value="{{$language->category_level}}">{{$language->category_level}}</option>
+                                <option value="Beginer">Beginer</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Expert">Expert</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tombol Hapus -->
+                <button class="text-red-500 hover:text-red-700 transition ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7H5m0 0l1.5 13A2 2 0 008.5 22h7a2 2 0 002-1.87L19 7M5 7l1.5-4A2 2 0 018.5 2h7a2 2 0 012 1.87L19 7M10 11v6m4-6v6" />
+                    </svg>
+                </button>
+            </li>
+            @empty
+            <li class="rounded flex items-center justify-between">
+                <div class="flex items-center space-x-4 w-full">
+                    <!-- Drag Icon (Two Lines) -->
+                    <div class="cursor-move text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                        </svg>
+                    </div>
+
+                    <!-- Language and Level Fields -->
+                    <div class="grid grid-cols-2 gap-4 w-full">
+                        <div class="col-span-1">
+                            <select name="language_name[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;">
+                                <option value="" disabled selected>Pilih Bahasa</option>
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Inggris">Inggris</option>
+                                <option value="Mandarin">Mandarin</option>
+                            </select>
+                            @error('language_name')
+                            <div class="text-sm font-thin text-red-500">Bahasa harus diisi</div>
+                            @enderror
+                        </div>
+                        <div class="col-span-1">
+                            <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;">
                                 <option value="" disabled selected>Pilih Level</option>
                                 <option value="Beginer">Beginer</option>
                                 <option value="Medium">Medium</option>
@@ -88,6 +130,7 @@
                     </svg>
                 </button>
             </li>
+            @endforelse
         </ul>
 
         <!-- Add Another Language Button -->

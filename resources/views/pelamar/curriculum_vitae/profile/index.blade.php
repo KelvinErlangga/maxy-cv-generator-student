@@ -39,14 +39,19 @@
 
 
     <!-- Form Container -->
-    <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20">
+    <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20" style="max-width: 800px; width: 100%;">
         <!-- Form Title -->
         <h2 class="text-2xl text-center text-blue-800 mb-8">Detail Pribadi</h2>
 
         <!-- Form -->
         <form method="POST" action="{{route('pelamar.curriculum_vitae.profile.addProfile', $curriculumVitaeUser)}}" enctype="multipart/form-data">
             @csrf
+
+            @php
+            $personalCurriculumVitae = $curriculumVitaeUser->personalCurriculumVitae;
+            @endphp
             <!-- Replace with Laravel's @csrf -->
+            @if($personalCurriculumVitae)
             <div class="grid grid-cols-4 gap-4">
                 <!-- Foto -->
                 <div class="col-span-1 flex flex-col items-center">
@@ -59,11 +64,11 @@
                 <!-- Nama Depan -->
                 <div class="col-span-3">
                     <input
-                        id="first_name"
+                        id="first_name_curriculum_vitae"
                         type="text"
-                        name="first_name"
+                        name="first_name_curriculum_vitae"
                         placeholder="Nama Depan"
-                        value="{{old('first_name')}}"
+                        value="{{$personalCurriculumVitae->first_name_curriculum_vitae}}"
                         class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
                         style="height: 45px; padding: 0 16px"
                         required>
@@ -71,14 +76,114 @@
                 <!-- Nama Belakang -->
                 <div class="col-span-3 col-start-2 -mt-16">
                     <input
-                        id="last_name"
+                        id="last_name_curriculum_vitae"
                         type="text"
-                        name="last_name"
-                        value="{{old('last_name')}}"
+                        name="last_name_curriculum_vitae"
+                        value="{{$personalCurriculumVitae->last_name_curriculum_vitae}}"
                         placeholder="Nama Belakang"
+                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px">
+                </div>
+                <!-- Kota -->
+                <div class="col-span-2">
+                    <input
+                        id="city_curriculum_vitae"
+                        type="text"
+                        name="city_curriculum_vitae"
+                        value="{{$personalCurriculumVitae->city_curriculum_vitae}}"
+                        placeholder="Kota"
+                        class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px"
+                        required>
+                    @error('city_curriculum_vitae')
+                    <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Alamat -->
+                <div class="col-span-2">
+                    <input
+                        id="address_curriculum_vitae"
+                        type="text"
+                        name="address_curriculum_vitae"
+                        placeholder="Alamat"
+                        value="{{$personalCurriculumVitae->address_curriculum_vitae}}"
+                        class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px">
+                    @error('address_curriculum_vitae')
+                    <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Email -->
+                <div class="col-span-2">
+                    <input
+                        id="email_curriculum_vitae"
+                        type="email"
+                        name="email_curriculum_vitae"
+                        value="{{$personalCurriculumVitae->email_curriculum_vitae}}"
+                        placeholder="Alamat Email"
                         class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
                         style="height: 45px; padding: 0 16px"
                         required>
+                    @error('email_curriculum_vitae')
+                    <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Nomor Telepon -->
+                <div class="col-span-2">
+                    <input
+                        id="phone_curriculum_vitae"
+                        type="number"
+                        name="phone_curriculum_vitae"
+                        placeholder="Nomor Telepon"
+                        value="{{$personalCurriculumVitae->phone_curriculum_vitae}}"
+                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px"
+                        required>
+                    @error('phone_curriculum_vitae')
+                    <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Ringkasan -->
+                <div class="col-span-4">
+                    <div id="editor" class="bg-white rounded border border-gray-300" style="height: 150px;"></div>
+                    <input type="hidden" id="personal_summary" name="personal_summary" value="{{$personalCurriculumVitae->personal_summary}}">
+                    @error('personal_summary')
+                    <div class="text-sm font-thin text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            @else
+            <div class="grid grid-cols-4 gap-4">
+                <!-- Foto -->
+                <div class="col-span-1 flex flex-col items-center">
+                    <label for="avatar_curriculum_vitae" class="cursor-pointer flex flex-col items-center border border-gray-300 rounded-lg p-4 hover:border-blue-500 transition">
+                        <img src="{{asset('assets/images/photo-placeholder.png')}}" alt="Tambah Foto" class="mb-2 w-14">
+                        <span class="text-sm font-medium text-blue-700">Tambahkan Foto</span>
+                        <input type="file" id="avatar_curriculum_vitae" name="avatar_curriculum_vitae" class="hidden">
+                    </label>
+                </div>
+                <!-- Nama Depan -->
+                <div class="col-span-3">
+                    <input
+                        id="first_name_curriculum_vitae"
+                        type="text"
+                        name="first_name_curriculum_vitae"
+                        placeholder="Nama Depan"
+                        value="{{old('first_name_curriculum_vitae')}}"
+                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px"
+                        required>
+                </div>
+                <!-- Nama Belakang -->
+                <div class="col-span-3 col-start-2 -mt-16">
+                    <input
+                        id="last_name_curriculum_vitae"
+                        type="text"
+                        name="last_name_curriculum_vitae"
+                        value="{{old('last_name_curriculum_vitae')}}"
+                        placeholder="Nama Belakang"
+                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                        style="height: 45px; padding: 0 16px">
                 </div>
                 <!-- Kota -->
                 <div class="col-span-2">
@@ -148,6 +253,7 @@
                     @enderror
                 </div>
             </div>
+            @endif
 
             <!-- Langkah Selanjutnya -->
             <button
@@ -180,6 +286,10 @@
             quill.root.style.fontFamily = 'Poppins, sans-serif';
 
             var summaryInput = document.querySelector('input#personal_summary');
+            if (summaryInput.value) {
+                quill.clipboard.dangerouslyPasteHTML(summaryInput.value); // Mengatur konten awal editor
+            }
+
             quill.on('text-change', function() {
                 summaryInput.value = quill.getText().trim();
             });

@@ -44,12 +44,45 @@
     <!-- Form Container -->
     <form action="{{route('pelamar.curriculum_vitae.skill.addSkill', $curriculumVitaeUser->id)}}" method="POST" class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20 grid grid-cols-1 md:grid-cols-2 gap-8" style="max-width: 1000px; width: 100%;">
         @csrf
-        <h2 class="text-2xl text-center text-blue-800 md:col-span-2 mb-8">Keterampilan Teknis</h2>
+        <h2 class="text-2xl text-center text-blue-800 md:col-span-2 mb-8">Keahlian</h2>
 
         <!-- Left Section: Keahlian dan Level -->
         <div class="space-y-6">
             <!-- Additional Skills -->
             <ul id="language-list" class="space-y-4">
+                @forelse($curriculumVitaeUser->skills as $skill)
+                <li class="rounded flex items-center justify-between">
+                    <div class="flex items-center space-x-4 w-full">
+                        <!-- Drag Icon -->
+                        <div class="cursor-move text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                            </svg>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 w-full">
+                            <div class="col-span-1">
+                                <input type="text" name="skill_name[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-3" placeholder="Keahlian" value="{{$skill->skill_name}}" required />
+                                @error('skill_name')
+                                <div class="text-sm font-thin text-red-500">Keahlian harus diisi</div>
+                                @enderror
+                            </div>
+                            <div class="col-span-1">
+                                <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 50px; padding: 0 10px;" required>
+                                    <option value="{{$skill->category_level}}">{{$skill->category_level}}</option>
+                                    <option value="Beginer">Beginer</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Expert">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="text-red-500 hover:text-red-700 transition ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7H5m0 0l1.5 13A2 2 0 008.5 22h7a2 2 0 002-1.87L19 7M5 7l1.5-4A2 2 0 018.5 2h7a2 2 0 012 1.87L19 7M10 11v6m4-6v6" />
+                        </svg>
+                    </button>
+                </li>
+                @empty
                 <li class="rounded flex items-center justify-between">
                     <div class="flex items-center space-x-4 w-full">
                         <!-- Drag Icon -->
@@ -81,6 +114,7 @@
                         </svg>
                     </button>
                 </li>
+                @endforelse
             </ul>
             <button type="button" id="add-language-btn" class="mt-6 w-full py-4 bg-blue-100 text-blue-700 text-sm font-bold rounded shadow hover:bg-blue-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition text-center block">
                 + Tambah Keahlian Lain
@@ -138,7 +172,7 @@
             jobList.innerHTML = ''; // Clear previous results
 
             // Show recommendations only if searchInput has 3 or more characters
-            if (searchInputValue.length >= 10) {
+            if (searchInputValue.length >= 5) {
                 Object.keys(jobSkills).forEach(job => {
                     if (job.toLowerCase().includes(searchInputValue)) {
                         jobList.style.display = 'block'; // Show the job list

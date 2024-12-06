@@ -64,7 +64,7 @@
         <div class="lg:w-1/2 text-center lg:text-left">
             <h2 class="text-4xl font-extrabold text-blue-800 mb-6">Raih Karier Impianmu!</h2>
             <p class="text-lg text-gray-700 mb-8">Tingkatkan peluang karir Anda dengan mudah melalui pilihan template profesional kami. Yuk buat CV Anda sekarang, rasakan kemudahannya, dan raih karir yang Anda impikan!</p>
-            <a href="#" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg py-3 px-16 rounded-lg shadow-lg"> Buat CV </a>
+            <a href="{{route('pelamar.curriculum_vitae.index')}}" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg py-3 px-16 rounded-lg shadow-lg"> Buat CV </a>
         </div>
 
         <!-- CV Slider -->

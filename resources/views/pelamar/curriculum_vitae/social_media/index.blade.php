@@ -50,6 +50,38 @@
             <!-- Swiper Container (Drag and Drop List) -->
             <ul id="link-list" class="space-y-4">
                 <!-- Link Informasi 1 -->
+                @forelse($curriculumVitaeUser->links as $link)
+                <li class="rounded flex items-center justify-between">
+                    <div class="flex items-center space-x-4 w-full">
+                        <!-- Drag Icon (Two Lines) -->
+                        <div class="cursor-move text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                            </svg>
+                        </div>
+
+                        <!-- Link Informasi dan Field Level -->
+                        <div class="grid grid-cols-2 gap-4 w-full">
+                            <div class="col-span-1">
+                                <input type="text" name="link_name[]" value="{{$link->link_name}}" class="link-input block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" placeholder="Masukkan Nama Link" required />
+                                @error('link_name')
+                                <div class="text-sm font-thin text-red-500">Link harus diisi</div>
+                                @enderror
+                            </div>
+                            <div class="col-span-1">
+                                <input type="text" name="url[]" value="{{$link->url}}" class="desc-input block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" placeholder="Masukkan Link Informasi" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <button class="text-red-500 hover:text-red-700 transition ml-4 delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7H5m0 0l1.5 13A2 2 0 008.5 22h7a2 2 0 002-1.87L19 7M5 7l1.5-4A2 2 0 018.5 2h7a2 2 0 012 1.87L19 7M10 11v6m4-6v6" />
+                        </svg>
+                    </button>
+                </li>
+                @empty
                 <li class="rounded flex items-center justify-between">
                     <div class="flex items-center space-x-4 w-full">
                         <!-- Drag Icon (Two Lines) -->
@@ -80,6 +112,7 @@
                         </svg>
                     </button>
                 </li>
+                @endforelse
             </ul>
 
             <!-- Add Another Link Button -->

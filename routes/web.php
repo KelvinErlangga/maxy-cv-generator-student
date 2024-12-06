@@ -3,6 +3,7 @@
 use App\Http\Controllers\CurriculumVitaeUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TemplateCoverLetterController;
 use App\Http\Controllers\TemplateCurriculumVitaeController;
@@ -47,6 +48,11 @@ Route::middleware('auth', 'verified')->group(function () {
             ->name('pelamar.curriculum_vitae.profile.index');
         Route::post('/curriculum-vitae/{curriculum_vitae_user}/profile', [CurriculumVitaeUserController::class, 'addProfile'])
             ->name('pelamar.curriculum_vitae.profile.addProfile');
+
+        Route::get('/curriculum-vitae/{curriculum_vitae_user}/profile/edit/{personalCurriculumVitae}', [CurriculumVitaeUserController::class, 'editProfile'])
+            ->name('pelamar.curriculum_vitae.profile.editProfile');
+        Route::put('/curriculum-vitae/{curriculum_vitae_user}/profile/edit/{personalCurriculumVitae}', [CurriculumVitaeUserController::class, 'updateProfile'])
+            ->name('pelamar.curriculum_vitae.profile.updateProfile');
 
         // pengalaman kerja
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/profile/experience', [CurriculumVitaeUserController::class, 'getExperience'])
@@ -146,6 +152,16 @@ Route::middleware('auth', 'verified')->group(function () {
         //     ->name('pelamar.curriculum_vitae.social_media.updateSocialMedia');
         // Route::delete('/curriculum-vitae/{curriculum_vitae_user}/profile/social-media/{social_media}', [CurriculumVitaeUserController::class, 'deleteSocialMedia'])
         //     ->name('pelamar.curriculum_vitae.social_media.deleteSocialMedia');
+
+
+        // preview cv
+        Route::get('/curriculum-vitae/{curriculum_vitae_user}/preview', [CurriculumVitaeUserController::class, 'previewCV'])->name('pelamar.curriculum_vitae.preview.index');
+
+        // print cv
+        Route::get('/curriculum-vitae/{curriculum_vitae_user}/print-cv', [PDFController::class, 'printCurriculumVitae'])->name('print-cv');
+
+        // download cv
+        Route::get('/curriculum-vitae/{curriculum_vitae_user}/export-cv', [PDFController::class, 'exportPDFCurriculumVitae'])->name('export-cv.pdf');
     });
 
 

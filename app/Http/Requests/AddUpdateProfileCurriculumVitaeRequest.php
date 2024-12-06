@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddProfileCurriculumVitaeRequest extends FormRequest
+class AddUpdateProfileCurriculumVitaeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class AddProfileCurriculumVitaeRequest extends FormRequest
     {
         return [
             'avatar_curriculum_vitae' => ['nullable', 'image', 'mimes:jpeg,jpg,png'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name_curriculum_vitae' => ['required', 'string', 'max:255'],
+            'last_name_curriculum_vitae' => ['nullable', 'string', 'max:255'],
             'email_curriculum_vitae' => ['required', 'string', 'max:255'],
             'phone_curriculum_vitae' => ['required', 'string', 'max:13'],
             'city_curriculum_vitae' => ['required', 'string', 'max:255'],

@@ -26,6 +26,13 @@ class CurriculumVitaeUser extends Model
         return $this->belongsTo(TemplateCurriculumVitae::class, 'template_curriculum_vitae_id');
     }
 
+    public static function findByUserIdAndTemplateId($userId, $templateId)
+    {
+        return self::where('user_id', $userId)
+            ->where('template_curriculum_vitae_id', $templateId)
+            ->first();
+    }
+
     // relasi dengan tabel personal curriculum vitae
     public function personalCurriculumVitae()
     {

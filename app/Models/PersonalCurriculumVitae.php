@@ -12,7 +12,8 @@ class PersonalCurriculumVitae extends Model
     protected $fillable = [
         'curriculum_vitae_user_id',
         'avatar_curriculum_vitae',
-        'full_name_curriculum_vitae',
+        'first_name_curriculum_vitae',
+        'last_name_curriculum_vitae',
         'email_curriculum_vitae',
         'phone_curriculum_vitae',
         'city_curriculum_vitae',
