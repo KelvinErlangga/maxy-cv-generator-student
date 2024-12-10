@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keterampilan Teknis | CVRE GENERATE</title>
+    <title>Keahlian | CVRE GENERATE</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 
@@ -152,32 +152,30 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Job skills data for filtering
-        const jobSkills = {
-            "Product Designer": ["Figma", "Illustrator", "Sketch", "Photoshop", "Canva", "Affinity Designer", "Adobe XD", "Invision", "Axure RP", "Balsamiq"],
-            "Web Developer": ["HTML", "CSS", "JavaScript", "React", "Node.js", "Vue.js", "TypeScript", "Sass", "Bootstrap", "Git"],
-            "Graphic Designer": ["Illustrator", "Photoshop", "InDesign", "CorelDRAW", "Canva", "Sketch", "Figma", "Adobe XD", "After Effects", "Premiere Pro"]
-        };
-
         const jobList = document.getElementById('job-list');
         const searchInput = document.getElementById('search-job');
+        let jobSkills = {}; // To store data from the server
 
-        // Initially hide the job list
-        jobList.style.display = 'none';
+        // Fetch data from server
+        fetch('/api/job-skills')
+            .then(response => response.json())
+            .then(data => {
+                jobSkills = data;
+            })
+            .catch(error => console.error('Error fetching job skills:', error));
 
-        // Listen to the search input for changes
+        // Listen to search input changes
         searchInput.addEventListener('input', filterJobs);
 
         function filterJobs() {
             const searchInputValue = searchInput.value.toLowerCase();
             jobList.innerHTML = ''; // Clear previous results
 
-            // Show recommendations only if searchInput has 3 or more characters
-            if (searchInputValue.length >= 5) {
+            if (searchInputValue.length >= 3) {
                 Object.keys(jobSkills).forEach(job => {
                     if (job.toLowerCase().includes(searchInputValue)) {
-                        jobList.style.display = 'block'; // Show the job list
+                        jobList.style.display = 'block'; // Show job list
 
-                        // Display job recommendations
                         jobSkills[job].forEach(skill => {
                             const skillItem = document.createElement('li');
                             skillItem.classList.add('text-gray-700', 'flex', 'justify-between', 'items-center', 'bg-gray-50', 'p-2', 'rounded', 'shadow-sm', 'job-item');
@@ -189,7 +187,7 @@
                             selectButton.type = 'button';
                             selectButton.classList.add('text-blue-500', 'hover:text-blue-700');
                             selectButton.textContent = 'Pilih';
-                            selectButton.addEventListener('click', () => addSkillToForm(skill)); // Add to skill form input
+                            selectButton.addEventListener('click', () => addSkillToForm(skill)); // Add skill to form
 
                             skillItem.appendChild(skillName);
                             skillItem.appendChild(selectButton);
@@ -198,53 +196,53 @@
                     }
                 });
             } else {
-                jobList.style.display = 'none'; // Hide the job list if less than 3 characters
+                jobList.style.display = 'none'; // Hide job list if less than 3 characters
             }
         }
 
-        // Function to add selected skill to the form
         function addSkillToForm(skill) {
             const languageList = document.getElementById('language-list');
+
+            // Cek apakah skill sudah ada di daftar
+            const existingSkills = Array.from(languageList.querySelectorAll('input[name="skill_name[]"]')).map(input => input.value);
+            if (existingSkills.includes(skill)) {
+                alert('Skill sudah dipilih!');
+                return; // Jangan tambahkan jika skill sudah ada
+            }
+
             const newSkillItem = document.createElement('li');
             newSkillItem.classList.add('rounded', 'flex', 'items-center', 'justify-between');
             newSkillItem.innerHTML =
                 `<div class="flex items-center space-x-4 w-full">
-                    <div class="cursor-move text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-                        </svg>
+                <div class="cursor-move text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                    </svg>
+                </div>
+                <div class="grid grid-cols-2 gap-4 w-full">
+                    <div class="col-span-1">
+                        <input type="text" name="skill_name[]" value="${skill}" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-3" />
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <div class="col-span-1">
-                            <input type="text" name="skill_name[]" value="${skill}" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-3" />
-                        </div>
-                        <div class="col-span-1">
-                            <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 50px; padding: 0 10px;">
-                                <option value="Beginer">Beginer</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Expert">Expert</option>
-                            </select>
-                        </div>
+                    <div class="col-span-1">
+                        <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 50px; padding: 0 10px;">
+                            <option value="Beginer">Beginer</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Expert">Expert</option>
+                        </select>
                     </div>
                 </div>
-                <button type="button" class="text-red-500 hover:text-red-700 transition ml-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7H5m0 0l1.5 13A2 2 0 008.5 22h7a2 2 0 002-1.87L19 7M5 7l1.5-4A2 2 0 018.5 2h7a2 2 0 012 1.87L19 7M10 11v6m4-6v6" />
-                    </svg>
-                </button>`;
+            </div>
+            <button type="button" class="text-red-500 hover:text-red-700 transition ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7H5m0 0l1.5 13A2 2 0 008.5 22h7a2 2 0 002-1.87L19 7M5 7l1.5-4A2 2 0 018.5 2h7a2 2 0 012 1.87L19 7M10 11v6m4-6v6" />
+                </svg>
+            </button>`;
 
             languageList.appendChild(newSkillItem);
 
-            // Initialize SortableJS for the newly added language list
-            Sortable.create(languageList, {
-                animation: 150, // Animation duration
-                handle: '.cursor-move', // Only allow dragging using the drag icon
-                ghostClass: 'bg-blue-200', // Style while dragging
-            });
-
-            // Close the job recommendations list after selecting a skill
-            jobList.style.display = 'none';
-            jobList.innerHTML = ''; // Clear job list to prepare for the next search
+            // Hide job recommendations after selection
+            // jobList.style.display = 'none';
+            // jobList.innerHTML = ''; // Clear job list for next search
         }
 
         // Initialize SortableJS for Language List when DOM is loaded

@@ -102,7 +102,7 @@
                     <!-- Language and Level Fields -->
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div class="col-span-1">
-                            <select name="language_name[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;">
+                            <select name="language_name[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" required>
                                 <option value="" disabled selected>Pilih Bahasa</option>
                                 <option value="Indonesia">Indonesia</option>
                                 <option value="Inggris">Inggris</option>
@@ -113,7 +113,7 @@
                             @enderror
                         </div>
                         <div class="col-span-1">
-                            <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;">
+                            <select name="level[]" class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none" style="height: 45px; padding: 0 10px;" required>
                                 <option value="" disabled selected>Pilih Level</option>
                                 <option value="Beginer">Beginer</option>
                                 <option value="Medium">Medium</option>

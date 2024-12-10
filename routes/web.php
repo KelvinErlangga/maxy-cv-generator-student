@@ -3,11 +3,14 @@
 use App\Http\Controllers\CurriculumVitaeUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\RecommendedSkillController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TemplateCoverLetterController;
 use App\Http\Controllers\TemplateCurriculumVitaeController;
 use App\Http\Controllers\UserAdminController;
+use App\Models\RecommendedSkill;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
 
@@ -31,7 +34,10 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Route::get('/curriculum-vitae/template-curriculum-vitae', [CurriculumVitaeUserController::class, 'index'])->name('pelamar.curriculum_vitae.index');
 
-Route::middleware('auth', 'verified')->group(function () {
+Route::get('/api/job-skills', [JobController::class, 'getJobSkills']);
+
+// Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth')->group(function () {
 
     Route::get('/home', function () {
         return view('welcome');
@@ -187,6 +193,8 @@ Route::middleware('auth', 'verified')->group(function () {
             Route::resource('template_curriculum_vitae', TemplateCurriculumVitaeController::class);
             Route::resource('template_cover_letter', TemplateCoverLetterController::class);
             Route::resource('skills', SkillController::class);
+            Route::resource('jobs', JobController::class);
+            Route::resource('recommended_skills', RecommendedSkillController::class);
         });
     });
 });
