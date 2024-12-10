@@ -11,6 +11,10 @@ class PDFController extends Controller
 {
     public function exportPDFCurriculumVitae(CurriculumVitaeUser $curriculumVitaeUser)
     {
+        set_time_limit(300);
+
+        $curriculumVitaeUser->load(['personalCurriculumVitae', 'links', 'skills', 'experiences', 'educations', 'languages']);
+
         // Kirim data ke view PDF
         $pdf = Pdf::loadView('pelamar.curriculum_vitae.template.cv_' . $curriculumVitaeUser->template_curriculum_vitae_id, compact('curriculumVitaeUser'));
 

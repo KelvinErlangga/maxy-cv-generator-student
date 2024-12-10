@@ -181,7 +181,7 @@
             // Sinkronisasi data Quill ke textarea
             var summaryTextarea = document.querySelector('textarea#description_education');
             quill.on('text-change', function() {
-                summaryTextarea.value = quill.getText().trim();
+                summaryTextarea.value = quill.root.innerHTML;
             });
         });
 

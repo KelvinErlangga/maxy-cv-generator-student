@@ -30,4 +30,10 @@ class TemplateCoverLetter extends Model
 
         return $countTemplateCoverLetter;
     }
+
+    // relasi dengan tabel cover letter user
+    public function coverLetterUser()
+    {
+        return $this->hasMany(CoverLetterUser::class);
+    }
 }

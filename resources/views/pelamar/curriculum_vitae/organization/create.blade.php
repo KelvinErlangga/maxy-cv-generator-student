@@ -160,7 +160,7 @@
             // Sync Quill content to hidden textarea
             var ringkasanInput = document.querySelector('textarea#description_organization');
             quill.on('text-change', function() {
-                ringkasanInput.value = quill.getText().trim();
+                ringkasanInput.value = quill.root.innerHTML;
             });
         });
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoverLetterUserController;
 use App\Http\Controllers\CurriculumVitaeUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GoogleController;
@@ -34,10 +35,11 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Route::get('/curriculum-vitae/template-curriculum-vitae', [CurriculumVitaeUserController::class, 'index'])->name('pelamar.curriculum_vitae.index');
 
+Route::get('/cover-letter/template-cover-letter', [CoverLetterUserController::class, 'index'])->name('pelamar.cover_letter.index');
+
 Route::get('/api/job-skills', [JobController::class, 'getJobSkills']);
 
-// Route::middleware('auth', 'verified')->group(function () {
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
 
     Route::get('/home', function () {
         return view('welcome');
@@ -159,7 +161,6 @@ Route::middleware('auth')->group(function () {
         // Route::delete('/curriculum-vitae/{curriculum_vitae_user}/profile/social-media/{social_media}', [CurriculumVitaeUserController::class, 'deleteSocialMedia'])
         //     ->name('pelamar.curriculum_vitae.social_media.deleteSocialMedia');
 
-
         // preview cv
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/preview', [CurriculumVitaeUserController::class, 'previewCV'])->name('pelamar.curriculum_vitae.preview.index');
 
@@ -168,6 +169,46 @@ Route::middleware('auth')->group(function () {
 
         // download cv
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/export-cv', [PDFController::class, 'exportPDFCurriculumVitae'])->name('export-cv.pdf');
+
+
+        // cover letter generate
+        Route::post('/cover-letter/template-cover-letter', [CoverLetterUserController::class, 'store'])->name('pelamar.cover_letter.store');
+
+        // data diri
+        Route::get('/cover-letter/{cover_letter_user}/profile', [CoverLetterUserController::class, 'getProfile'])
+            ->name('pelamar.cover_letter.profile.index');
+        Route::post('/cover-letter/{cover_letter_user}/profile', [CoverLetterUserController::class, 'addProfile'])
+            ->name('pelamar.cover_letter.profile.addProfile');
+
+        // data perusahaan
+        Route::get('/cover-letter/{cover_letter_user}/profile-company', [CoverLetterUserController::class, 'getProfileCompany'])
+            ->name('pelamar.cover_letter.profile_company.index');
+        Route::post('/cover-letter/{cover_letter_user}/profile-company', [CoverLetterUserController::class, 'addProfileCompany'])
+            ->name('pelamar.cover_letter.profile_company.addProfileCompany');
+
+        // paragraf pembuka
+        Route::get('/cover-letter/{cover_letter_user}/paragraf-pembuka', [CoverLetterUserController::class, 'getParagrafPembuka'])
+            ->name('pelamar.cover_letter.paragraf_pembuka.index');
+        Route::post('/cover-letter/{cover_letter_user}/paragraf-pembuka', [CoverLetterUserController::class, 'addParagrafPembuka'])
+            ->name('pelamar.cover_letter.paragraf_pembuka.addParagrafPembuka');
+
+        // paragraf utama
+        Route::get('/cover-letter/{cover_letter_user}/paragraf-utama', [CoverLetterUserController::class, 'getParagrafUtama'])
+            ->name('pelamar.cover_letter.paragraf_utama.index');
+        Route::post('/cover-letter/{cover_letter_user}/paragraf-utama', [CoverLetterUserController::class, 'addParagrafUtama'])
+            ->name('pelamar.cover_letter.paragraf_utama.addParagrafUtama');
+
+        // paragraf penutup
+        Route::get('/cover-letter/{cover_letter_user}/paragraf-penutup', [CoverLetterUserController::class, 'getParagrafPenutup'])
+            ->name('pelamar.cover_letter.paragraf_penutup.index');
+        Route::post('/cover-letter/{cover_letter_user}/paragraf-penutup', [CoverLetterUserController::class, 'addParagrafPenutup'])
+            ->name('pelamar.cover_letter.paragraf_penutup.addParagrafPenutup');
+
+        // tanda tangan
+        Route::get('/cover-letter/{cover_letter_user}/tanda-tangan', [CoverLetterUserController::class, 'getTandaTangan'])
+            ->name('pelamar.cover_letter.tanda_tangan.index');
+        Route::post('/cover-letter/{cover_letter_user}/tanda-tangan', [CoverLetterUserController::class, 'addTandaTangan'])
+            ->name('pelamar.cover_letter.tanda_tangan.addTandaTangan');
     });
 
 

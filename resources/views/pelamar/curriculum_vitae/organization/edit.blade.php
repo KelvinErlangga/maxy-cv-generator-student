@@ -170,7 +170,7 @@
             }
 
             quill.on('text-change', function() {
-                ringkasanInput.value = quill.getText().trim();
+                ringkasanInput.value = quill.root.innerHTML;
             });
         });
 

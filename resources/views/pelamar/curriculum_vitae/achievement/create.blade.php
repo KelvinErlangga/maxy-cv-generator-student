@@ -108,7 +108,7 @@
             // Simpan data Quill ke input hidden
             var summaryInput = document.querySelector('input#description_achievement');
             quill.on('text-change', function() {
-                summaryInput.value = quill.getText().trim();
+                summaryInput.value = quill.root.innerHTML;
             });
         });
     </script>

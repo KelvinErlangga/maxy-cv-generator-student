@@ -174,7 +174,7 @@
             }
 
             quill.on('text-change', function() {
-                summaryInput.value = quill.getText().trim();
+                summaryInput.value = quill.root.innerHTML;
             });
         });
 

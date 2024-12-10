@@ -1,0 +1,264 @@
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  width: 595px;
+  height: 842px;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Left Panel */
+.left-panel {
+    width: 189px;
+    height: 842px;
+    background-color: #145349;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Tetap mulai dari atas */
+    align-items: center; /* Mengubah alignment ke tengah secara horizontal */
+    gap: 10px;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Tetap center */
+    gap: 3px;
+    padding-top: 30px;
+  }
+  
+  .profile-img {
+    width: 55px;
+    height: 55px;
+    background-color: #c44949;
+    border-radius: 50%;
+    overflow: hidden; /* Memotong gambar di luar lingkaran */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-img img {
+    width: 100%; /* Memastikan gambar memenuhi kontainer */
+    height: 100%; /* Memastikan gambar memenuhi kontainer */
+    object-fit: cover; /* Memotong gambar jika proporsinya tidak sesuai */
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Tetap center */
+    gap: 1px;
+  }
+  
+  .profile-info .name {
+    text-align: center;
+    color: #fafafa;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 4px;
+  }
+  
+  .profile-info .role {
+    text-align: center;
+    color: #fafafa;
+    font-size: 10px;
+    line-height: 4px;
+    margin-bottom: 20px;
+  }
+  
+  /* Details Section */
+  .details-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+    gap: 4px;
+    width: 100%; /* Memastikan menggunakan lebar penuh */
+    margin-left: 80px;
+  }
+  
+  .details-title {
+    color: #fafafa;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 6px;
+    text-align: left; /* Align ke kiri */
+  }
+  
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+  }
+  
+  .detail-item .sub-menu {
+    color: #fafafa;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 0px;
+  }
+  
+  .detail-item p {
+    color: #fafafa;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 0px;
+  }
+  
+  /* Links Section */
+  .links-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+    gap: 4px;
+    width: 100%; /* Memastikan menggunakan lebar penuh */
+    margin-left: 80px;
+  }
+  
+  .links-title {
+    color: #fafafa;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 4px;
+    text-align: left; /* Align ke kiri */
+  }
+  
+  .link-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+    gap: 1px;
+  }
+  
+  .link-item p {
+    color: #fafafa;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 3px;
+  }
+  
+  /* Skills Section */
+  .skills-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+    gap: 3px;
+    width: 100%; /* Memastikan menggunakan lebar penuh */
+    margin-left: 80px;
+  }
+  
+  .skills-title {
+    color: #fafafa;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 5px;
+  }
+  
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start; /* Align ke kiri */
+    gap: 1px;
+  }
+  
+  .skill-item .sub-menu {
+    color: #fafafa;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 3px;
+  }
+  
+  .skill-divider {
+    width: 110px;
+    height: 0;
+    border-top: 2px solid white;
+    opacity: 0.4;
+  }
+  
+
+/* Right Panel */
+.right-panel {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.right-panel h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.right-panel h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.right-panel h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.right-panel p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+.right-panel ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.right-panel ul li {
+  font-size: 12px;
+}
+
+/* Button Section */
+.download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.download-buttons button {
+  padding: 10px 20px;
+  background-color: #145349;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.download-buttons button:hover {
+  background-color: #0e3e34;
+}
+
