@@ -16,7 +16,7 @@ class CreateParagrafPembukaCoverLettersTable extends Migration
         Schema::create('paragraf_pembuka_cover_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cover_letter_user_id')->constrained()->onDelete('cascade');
-            $table->string('paragraf_pembuka_cover_letter');
+            $table->text('paragraf_pembuka_cover_letter');
             $table->timestamps();
         });
     }

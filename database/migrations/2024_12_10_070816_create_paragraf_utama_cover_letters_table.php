@@ -16,8 +16,8 @@ class CreateParagrafUtamaCoverLettersTable extends Migration
         Schema::create('paragraf_utama_cover_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cover_letter_user_id')->constrained()->onDelete('cascade');
-            $table->string('paragraf_utama_1_cover_letter');
-            $table->string('paragraf_utama_2_cover_letter')->nullable();
+            $table->text('paragraf_utama_1_cover_letter');
+            $table->text('paragraf_utama_2_cover_letter')->nullable();
             $table->timestamps();
         });
     }

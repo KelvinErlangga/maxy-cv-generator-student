@@ -26,17 +26,20 @@
         <!-- Stepper -->
         <div class="flex justify-center mt-8 mb-20">
             <div class="flex items-center">
+                <!-- Step 1: Check Icon -->
                 <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white font-bold">
                     <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
                 </div>
                 <div class="w-28 h-px bg-blue-700"></div>
 
-                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white text-3xl">
-                    2
+                <!-- Step 2: Current Step -->
+                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
                 </div>
                 <div class="w-28 h-px bg-blue-700"></div>
 
-                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-gray-300 text-gray-700 text-3xl">
+                <!-- Step 3 -->
+                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white text-3xl">
                     3
                 </div>
             </div>

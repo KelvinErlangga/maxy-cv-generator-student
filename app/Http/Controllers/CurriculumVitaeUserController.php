@@ -385,6 +385,13 @@ class CurriculumVitaeUserController extends Controller
     // tampil preview cv
     public function previewCV(CurriculumVitaeUser $curriculumVitaeUser)
     {
-        return view('pelamar.curriculum_vitae.template.cv_' . $curriculumVitaeUser->template_curriculum_vitae_id, compact('curriculumVitaeUser'));
+        $templateView = 'pelamar.curriculum_vitae.template.cv_' . $curriculumVitaeUser->template_curriculum_vitae_id;
+
+        // Cek apakah view ada
+        if (!view()->exists($templateView)) {
+            $templateView = 'pelamar.curriculum_vitae.template.cv_1';
+        }
+
+        return view($templateView, compact('curriculumVitaeUser'));
     }
 }
