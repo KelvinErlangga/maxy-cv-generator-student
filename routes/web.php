@@ -3,6 +3,8 @@
 use App\Http\Controllers\CoverLetterUserController;
 use App\Http\Controllers\CurriculumVitaeUserController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardCompanyController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PDFController;
@@ -102,20 +104,12 @@ Route::middleware('auth', 'verified')->group(function () {
             ->name('pelamar.curriculum_vitae.language.index');
         Route::post('/curriculum-vitae/{curriculum_vitae_user}/profile/language', [CurriculumVitaeUserController::class, 'addLanguage'])
             ->name('pelamar.curriculum_vitae.language.addLanguage');
-        // Route::put('/curriculum-vitae/{curriculum_vitae_user}/profile/language/{language}', [CurriculumVitaeUserController::class, 'updateLanguage'])
-        //     ->name('pelamar.curriculum_vitae.language.updateLanguage');
-        // Route::delete('/curriculum-vitae/{curriculum_vitae_user}/profile/language/{language}', [CurriculumVitaeUserController::class, 'deleteLanguage'])
-        //     ->name('pelamar.curriculum_vitae.language.deleteLanguage');
 
         // keahlian
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/profile/skill', [CurriculumVitaeUserController::class, 'getSkill'])
             ->name('pelamar.curriculum_vitae.skill.index');
         Route::post('/curriculum-vitae/{curriculum_vitae_user}/profile/skill', [CurriculumVitaeUserController::class, 'addSkill'])
             ->name('pelamar.curriculum_vitae.skill.addSkill');
-        // Route::put('/curriculum-vitae/{curriculum_vitae_user}/profile/skill/{skill}', [CurriculumVitaeUserController::class, 'updateSkill'])
-        //     ->name('pelamar.curriculum_vitae.skill.updateSkill');
-        // Route::delete('/curriculum-vitae/{curriculum_vitae_user}/profile/skill/{skill}', [CurriculumVitaeUserController::class, 'deleteSkill'])
-        //     ->name('pelamar.curriculum_vitae.skill.deleteSkill');
 
         // organisasi
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/profile/organization', [CurriculumVitaeUserController::class, 'getOrganization'])
@@ -156,10 +150,6 @@ Route::middleware('auth', 'verified')->group(function () {
             ->name('pelamar.curriculum_vitae.social_media.index');
         Route::post('/curriculum-vitae/{curriculum_vitae_user}/profile/social-media', [CurriculumVitaeUserController::class, 'addSocialMedia'])
             ->name('pelamar.curriculum_vitae.social_media.addSocialMedia');
-        // Route::put('/curriculum-vitae/{curriculum_vitae_user}/profile/social-media/{social_media}', [CurriculumVitaeUserController::class, 'updateSocialMedia'])
-        //     ->name('pelamar.curriculum_vitae.social_media.updateSocialMedia');
-        // Route::delete('/curriculum-vitae/{curriculum_vitae_user}/profile/social-media/{social_media}', [CurriculumVitaeUserController::class, 'deleteSocialMedia'])
-        //     ->name('pelamar.curriculum_vitae.social_media.deleteSocialMedia');
 
         // preview cv
         Route::get('/curriculum-vitae/{curriculum_vitae_user}/preview', [CurriculumVitaeUserController::class, 'previewCV'])->name('pelamar.curriculum_vitae.preview.index');
@@ -209,15 +199,50 @@ Route::middleware('auth', 'verified')->group(function () {
             ->name('pelamar.cover_letter.tanda_tangan.index');
         Route::post('/cover-letter/{cover_letter_user}/tanda-tangan', [CoverLetterUserController::class, 'addTandaTangan'])
             ->name('pelamar.cover_letter.tanda_tangan.addTandaTangan');
+
+        // dashboard user
+        Route::get('/dashboard-user', [DashboardUserController::class, 'index'])
+            ->name('pelamar.dashboard.index');
+
+        Route::get('/dashboard-user/akun', [DashboardUserController::class, 'getAkun'])
+            ->name('pelamar.dashboard.akun.index');
+
+        // dashboard user lowongan
+        Route::get('/dashboard-user/lowongan', [DashboardUserController::class, 'getLowongan'])
+            ->name('pelamar.dashboard.lowongan.index');
+
+        // dashboard user lowongan
+        Route::get('/dashboard-user/lowongan/{id}', [DashboardUserController::class, 'getShowLowongan'])
+            ->name('pelamar.dashboard.lowongan.show');
+
+        // dashboard user cv
+        Route::get('/dashboard-user/curriculum-vitae', [DashboardUserController::class, 'getCurriculumVitae'])
+            ->name('pelamar.dashboard.curriculum_vitae.index');
+        Route::delete('/dashboard-user/curriculum-vitae/{curriculum_vitae_user}', [DashboardUserController::class, 'deleteCurriculumVitae'])
+            ->name('pelamar.dashboard.curriculum_vitae.delete');
+
+        // dashboard user cl
+        Route::get('/dashboard-user/cover-letter', [DashboardUserController::class, 'getCoverLetter'])
+            ->name('pelamar.dashboard.cover_letter.index');
+        Route::delete('/dashboard-user/cover-letter/{cover_letter_user}', [DashboardUserController::class, 'deleteCoverLetter'])
+            ->name('pelamar.dashboard.cover_letter.delete');
     });
 
 
     // Route Perusahaan
     Route::middleware('role:perusahaan')->group(function () {
 
-        Route::get('/dashboard-perusahaan', function () {
-            return view('perusahaan.index');
-        })->name('dashboard-perusahaan');
+        Route::get('/dashboard-perusahaan', [DashboardCompanyController::class, 'index'])
+            ->name('dashboard-perusahaan');
+
+        Route::get('/dashboard-perusahaan/lowongan', [DashboardCompanyController::class, 'getLowongan'])
+            ->name('perusahaan.lowongan.index');
+
+        Route::post('/dashboard-perusahaan/lowongan', [DashboardCompanyController::class, 'addLowongan'])
+            ->name('perusahaan.lowongan.addLowongan');
+
+        Route::get('/dashboard-perusahaan/kandidat', [DashboardCompanyController::class, 'getKandidat'])
+            ->name('perusahaan.kandidat.index');
     });
 
 

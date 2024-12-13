@@ -77,15 +77,28 @@
 
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-4">
-
                     @auth
+
+                    @role('admin')
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="route('logout')" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                            Logout
-                        </a>
+                                                this.closest('form').submit();">Logout</a>
                     </form>
+                    @endrole
+
+                    @role('perusahaan')
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="route('logout')" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50" onclick="event.preventDefault();
+                                                this.closest('form').submit();">Logout</a>
+                    </form>
+                    @endrole
+
+                    @role('pelamar')
+                    <a href="{{route('pelamar.dashboard.index')}}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Dashboard Akun</a>
+                    @endrole
+
                     @else
                     <a href="{{route('login')}}" class="border border-blue-700 text-blue-700 font-medium text-sm px-4 py-2 rounded hover:bg-blue-50">Login</a>
                     @endauth

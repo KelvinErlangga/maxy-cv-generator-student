@@ -35,6 +35,84 @@
 @endpush
 
 @section('content')
+<!-- Hero Section -->
+<section class="relative min-h-screen overflow-hidden">
+    <img src="{{asset('assets/homepage/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
+
+    <div class="swiper heroSwiper relative z-10">
+        <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide flex items-center justify-center">
+                <div class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between py-12 px-6 md:px-0 mt-8">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h1 class="text-4xl lg:text-5xl font-extrabold text-blue-800 leading-tight mb-6">Siap Meningkatkan Kariermu?</h1>
+                        <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
+                            Kami menyediakan semua yang kamu butuhkan untuk memulai karier dengan percaya diri. Buat CV dan cover letter yang profesional hanya dalam beberapa langkah mudah.
+                        </p>
+                        <a href="{{route('pelamar.curriculum_vitae.index')}}" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg"> Ciptakan CV </a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-end">
+                        <img src="{{asset('assets/carousel-banner/banner-1.png')}}" alt="Banner 1" class="w-4/5 lg:w-auto" />
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide flex items-center justify-center">
+                <div class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between py-12 px-6 md:px-0 mt-8">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h1 class="text-4xl lg:text-5xl font-extrabold text-blue-800 leading-tight mb-6">Langkah Mudah Menuju Karier Impianmu</h1>
+                        <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
+                            Tak perlu bingung dengan format dan desain. Pilih template, isi data yang diperlukan, dan dokumenmu siap diunduh! Siap untuk melamar pekerjaan dengan dokumen yang sempurna dan profesional.
+                        </p>
+                        <a href="#" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg"> Raih Pekerjaanmu </a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-end">
+                        <img src="{{asset('assets/carousel-banner/banner-2.png')}}" alt="Banner 2" class="w-4/5 lg:w-auto" />
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide flex items-center justify-center">
+                <div class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between py-12 px-6 md:px-0 mt-8">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h1 class="text-4xl lg:text-5xl font-extrabold text-blue-800 leading-tight mb-6">Mulai Sekarang, Kejar Karier Impianmu!</h1>
+                        <p class="text-lg lg:text-xl text-gray-700 leading-relaxed mb-8">
+                            Jadikan langkah pertamamu menuju karier yang sukses lebih mudah dan percaya diri bersama CVRE Generate! Klik “Buat CV” dan ciptakan CV atau cover letter profesionalmu.
+                        </p>
+                        <a href="{{route('pelamar.cover_letter.index')}}" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg lg:text-xl py-3 px-8 rounded-lg shadow-lg"> Ciptakan Cover Letter </a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-end">
+                        <img src="{{asset('assets/carousel-banner/banner-3.png')}}" alt="Banner 3" class="w-4/5 lg:w-auto" />
+                    </div>
+                </div>
+            </div>
+            <!-- Additional slides can be added here -->
+        </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-blue-50 via-blue-50 to-transparent"></div>
+</section>
+
+<!-- Statistics Section -->
+<section class="bg-blue-50 py-12">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center space-y-6 md:space-y-0">
+        <div class="flex-1">
+            <h3 class="text-3xl font-bold text-blue-800">1300+</h3>
+            <p class="text-gray-600 text-lg">CV telah di-generate</p>
+        </div>
+        <div class="flex-1">
+            <h3 class="text-3xl font-bold text-blue-800">1000+</h3>
+            <p class="text-gray-600 text-lg">Pengguna diterima di top perusahaan</p>
+        </div>
+        <div class="flex-1">
+            <h3 class="text-3xl font-bold text-blue-800">1200+</h3>
+            <p class="text-gray-600 text-lg">Cover letter telah di-generate</p>
+        </div>
+    </div>
+</section>
+
 <!-- Partner Logos Section -->
 <section class="bg-blue-50 py-12">
     <div class="container mx-auto text-center">
@@ -179,7 +257,7 @@
         <div class="lg:w-1/2 text-center lg:text-left">
             <h2 class="text-4xl font-extrabold text-blue-800 mb-6">Buat Cover Letter Profesionalmu!</h2>
             <p class="text-lg text-gray-700 mb-8">Tingkatkan peluang kerja Anda dengan cover letter yang menarik dan profesional. Mulai buat cover letter Anda sekarang, dan rasakan perbedaannya!</p>
-            <a href="#" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg py-3 px-16 rounded-lg shadow-lg"> Buat Cover Letter </a>
+            <a href="{{route('pelamar.cover_letter.index')}}" class="bg-blue-800 hover:bg-blue-700 text-white font-medium text-lg py-3 px-16 rounded-lg shadow-lg"> Buat Cover Letter </a>
         </div>
 
         <!-- Cover Letter Slider -->

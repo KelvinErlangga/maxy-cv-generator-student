@@ -51,7 +51,7 @@
         <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20" style="max-width: 800px; width: 100%;">
 
             <!-- Form Title -->
-            <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Organisasi</h2>
+            <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Organisasi(opsional)</h2>
 
             <!-- List Pengalaman Organisasi (Dragable) -->
             <ul id="experience-list" class="space-y-4">

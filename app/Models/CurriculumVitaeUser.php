@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CurriculumVitaeUser extends Model
 {
@@ -13,6 +14,14 @@ class CurriculumVitaeUser extends Model
         'user_id',
         'template_curriculum_vitae_id'
     ];
+
+    // get all cv
+    public static function getCurriculumVitaeUser()
+    {
+        $curriculumVitaes = CurriculumVitaeUser::with(['templateCV', 'user'])->get();
+
+        return $curriculumVitaes;
+    }
 
     // relasi dengan tabel user
     public function user()

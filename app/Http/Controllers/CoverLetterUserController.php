@@ -174,7 +174,7 @@ class CoverLetterUserController extends Controller
     }
 
     // tampil preview cl
-    public function previewCV(CoverLetterUser $coverLetterUser)
+    public function previewCL(CoverLetterUser $coverLetterUser)
     {
         $templateView = 'pelamar.curriculum_vitae.template.cl_' . $coverLetterUser->template_cover_letter_id;
 

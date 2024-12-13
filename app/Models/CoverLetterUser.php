@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CoverLetterUser extends Model
 {
@@ -13,6 +14,14 @@ class CoverLetterUser extends Model
         'user_id',
         'template_cover_letter_id'
     ];
+
+    // get all cl
+    public static function getCoverLetter()
+    {
+        $coverLetters = CoverLetterUser::with(['templateCL', 'user'])->get();
+
+        return $coverLetters;
+    }
 
     // relasi dengan tabel user
     public function user()

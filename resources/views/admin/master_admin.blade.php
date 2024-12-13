@@ -80,21 +80,21 @@
 
             <li class="nav-item">
                 <a class="nav-link pb-0" href="{{route('admin.jobs.index')}}">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <i class="fas fa-fw fa-id-badge"></i>
                     <span>Data Pekerjaan</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link pb-0" href="{{route('admin.skills.index')}}">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Data Keahlian</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.recommended_skills.index')}}">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <i class="fas fa-fw fa-users-cog"></i>
                     <span>Rekomendasi Keahlian</span>
                 </a>
             </li>

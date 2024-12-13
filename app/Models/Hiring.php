@@ -12,13 +12,21 @@ class Hiring extends Model
     protected $fillable = [
         'personal_company_id',
         'position_hiring',
-        'description_hiring',
-        'city_hiring',
+        'address_hiring',
         'type_of_work',
-        'deadline_hiring',
+        'work_system',
+        'pola_kerja',
+        'education_hiring',
         'gaji',
-        'contact_information'
+        'deadline_hiring',
+        'description_hiring'
     ];
+
+    // relasi dengan table personal company
+    public function personalCompany()
+    {
+        return $this->belongsTo(PersonalCompany::class, 'personal_company_id');
+    }
 
     //relasi dengan tabel applicant
     public function applicants()

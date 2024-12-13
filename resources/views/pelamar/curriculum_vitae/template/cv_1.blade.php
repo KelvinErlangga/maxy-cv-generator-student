@@ -8,6 +8,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/editor.css')}}" />
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,6 +48,16 @@
             <div class="editor-item">
                 <img src="{{asset('assets/images/print.svg')}}" alt="Print Icon" style="width: 24px; height: 24px; margin-right: 8px;" />
                 <button class="editor-btn" onclick="printCV()">Print</button>
+            </div>
+
+            <div class="editor-item">
+                <img src="{{asset('assets/images/edit.svg')}}" alt="Edit Icon" style="width: 24px; height: 24px; margin-right: 8px;" />
+                <a href="{{route('pelamar.curriculum_vitae.profile.index', $curriculumVitaeUser->id)}}" class="editor-btn">Edit Data</a>
+            </div>
+
+            <div class="editor-item">
+                <img src="{{asset('assets/images/home.svg')}}" alt="Home Icon" style="width: 24px; height: 24px; margin-right: 8px;" />
+                <a href="{{route('home')}}" class="editor-btn">Back to Home</a>
             </div>
         </div>
 

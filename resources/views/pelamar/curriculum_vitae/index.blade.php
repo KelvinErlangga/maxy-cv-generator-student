@@ -42,7 +42,7 @@
         <h2 class="choose-template-title">Silahkan pilih template</h2>
 
         <div class="main-container">
-            @foreach($templateCurriculumVitae as $templateCV)
+            @forelse($templateCurriculumVitae as $templateCV)
             <form method="POST" action="{{route('pelamar.curriculum_vitae.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
@@ -52,7 +52,11 @@
                     <div class="template-name">{{$templateCV->template_curriculum_vitae_name}}</div>
                 </div>
             </form>
-            @endforeach
+            @empty
+            <div class="container">
+                <div class="template-name">Tidak ada template</div>
+            </div>
+            @endforelse
         </div>
     </div>
 </body>
