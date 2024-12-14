@@ -18,9 +18,11 @@ class DashboardUserController extends Controller
     {
         $hirings = Hiring::with('personalCompany')->get();
 
-        $pending = Applicant::where('status', 'Pending')->count();
-        $diterima = Applicant::where('status', 'Diterima')->count();
-        $ditolak = Applicant::where('status', 'Ditolak')->count();
+        $user = Auth::user();
+
+        $pending = Applicant::where('status', 'Pending')->where('user_id', $user->id)->count();
+        $diterima = Applicant::where('status', 'Diterima')->where('user_id', $user->id)->count();
+        $ditolak = Applicant::where('status', 'Ditolak')->where('user_id', $user->id)->count();
 
         return view('pelamar.dashboard.dashboard_user', compact('hirings', 'pending', 'diterima', 'ditolak'));
     }
@@ -83,7 +85,9 @@ class DashboardUserController extends Controller
     // Curriculum Vitae
     public function getCurriculumVitae()
     {
-        $curriculumVitaes = CurriculumVitaeUser::getCurriculumVitaeUser();
+        $user = Auth::user();
+
+        $curriculumVitaes = CurriculumVitaeUser::getCurriculumVitaeUser($user->id);
 
         return view('pelamar.dashboard.curriculum_vitae.index', compact('curriculumVitaes'));
     }

@@ -16,9 +16,10 @@ class CurriculumVitaeUser extends Model
     ];
 
     // get all cv
-    public static function getCurriculumVitaeUser()
+    public static function getCurriculumVitaeUser($userId)
     {
-        $curriculumVitaes = CurriculumVitaeUser::with(['templateCV', 'user'])->get();
+        $curriculumVitaes = CurriculumVitaeUser::with(['templateCV', 'user'])->where('user_id', $userId)
+            ->get();;
 
         return $curriculumVitaes;
     }
