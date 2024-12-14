@@ -28,25 +28,22 @@
                                     <th>Posisi Dilamar</th>
                                     <th>Alamat Email</th>
                                     <th>No. Handphone</th>
-                                    <th>Status</th>
-                                    <th>Pendidikan</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $no = 1;
+                                @endphp
+                                @forelse($applicants as $applicant)
                                 <tr>
-                                    <td>1.</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                            <span>Kelvin Erlangga</span>
-                                        </div>
-                                    </td>
-                                    <td>Senior Office Admin</td>
-                                    <td>admin@qaerra.com</td>
-                                    <td>+6280210231230</td>
-                                    <td>Online</td>
-                                    <td>S1 - Ekonomi</td>
+                                    <td>{{$no}}.</td>
+                                    <td>{{$applicant->user->name}}</td>
+                                    <td>{{$applicant->hiring->position_hiring}}</td>
+                                    <td>{{$applicant->user->email}}</td>
+                                    <td>{{$applicant->user->personalPelamar->phone_pelamar}}</td>
+                                    <td>{{$applicant->user->personalPelamar->gender}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-sm">
                                             <img src="{{asset('assets/icons/edit.svg')}}" alt="Edit" style="width: 30px; height: 30px" />
@@ -59,81 +56,14 @@
                                         </button>
                                     </td>
                                 </tr>
+                                @php
+                                $no++;
+                                @endphp
+                                @empty
                                 <tr>
-                                    <td>2.</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                            <span>Abrar</span>
-                                        </div>
-                                    </td>
-                                    <td>Senior Office Admin</td>
-                                    <td>admin@qaerra.com</td>
-                                    <td>+6280210231230</td>
-                                    <td>Offline</td>
-                                    <td>S1 - Ekonomi</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/edit.svg')}}" alt="Edit" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/delete.svg')}}" alt="Delete" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/view.svg')}}" alt="View" style="width: 30px; height: 30px" />
-                                        </button>
-                                    </td>
+                                    <td colspan="7">Tidak ada pelamar</td>
                                 </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                            <span>Richard</span>
-                                        </div>
-                                    </td>
-                                    <td>Senior Office Admin</td>
-                                    <td>admin@qaerra.com</td>
-                                    <td>+6280210231230</td>
-                                    <td>Offline</td>
-                                    <td>S1 - Ekonomi</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/edit.svg')}}" alt="Edit" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/delete.svg')}}" alt="Delete" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/view.svg')}}" alt="View" style="width: 30px; height: 30px" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                            <span>Kelvin Erlangga</span>
-                                        </div>
-                                    </td>
-                                    <td>Senior Office Admin</td>
-                                    <td>admin@qaerra.com</td>
-                                    <td>+6280210231230</td>
-                                    <td>Online</td>
-                                    <td>S1 - Ekonomi</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/edit.svg')}}" alt="Edit" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/delete.svg')}}" alt="Delete" style="width: 30px; height: 30px" />
-                                        </button>
-                                        <button class="btn btn-sm">
-                                            <img src="{{asset('assets/icons/view.svg')}}" alt="View" style="width: 30px; height: 30px" />
-                                        </button>
-                                    </td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

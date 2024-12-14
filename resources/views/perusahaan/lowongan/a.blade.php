@@ -15,71 +15,27 @@
                 <div class="card-body m-10">
                     <div class="row">
                         <div class="col-md-4 text-center">
+                            <!-- <img src="{{asset('assets/akun/profil.png')}}" alt="Profile Picture" class="img-fluid rounded-circle mb-3 mx-auto d-block" style="width: 150px" /> -->
                             <h3 class="font-weight-bold mb-2">{{Auth::user()->name}}</h3>
+                            <!-- <p>UI/UX Designer</p> -->
                             <ul class="nav flex-column mt-8">
                                 <li class="nav-item">
-                                    <a class="nav-link text-primary font-weight-bold m-3" href="#" onclick="showForm('list')">List Lowongan</a>
+                                    <a class="nav-link active text-primary font-weight-bold m-3" href="#">Posting Lowongan</a>
                                     <hr />
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-secondary m-3" href="#" onclick="showForm('form')">Posting Lowongan</a>
+                                    <a class="nav-link text-secondary m-3" href="#">Lowongan Aktif</a>
+                                    <hr />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-secondary m-3" href="#">Lainnya</a>
                                     <hr />
                                 </li>
                             </ul>
                         </div>
 
                         <div class="col-md-8">
-                            <!-- Daftar Lowongan Aktif -->
-                            <div id="list-container" class="row form-container" style="display: block;">
-                                <!-- Tabel Kandidat -->
-                                <div class="col-xl-12 col-lg-7">
-                                    <div class="card shadow mb-4">
-                                        <!-- Header Card -->
-                                        <div class="card-header py-3 text-center">
-                                            <h6 class="m-0 font-weight-bold text-dark">Lowongan</h6>
-                                        </div>
-                                        <!-- Body Card -->
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="dataTables" class="table table-bordered table-striped" width="100%" cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Posisi</th>
-                                                            <th>Jenis Pekerjaan</th>
-                                                            <th>Sistem Kerja</th>
-                                                            <th>Tanggal Dibuat</th>
-                                                            <th>Batas Waktu</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($hirings as $hiring)
-                                                        <tr>
-                                                            <td>{{ $hiring->position_hiring }}</td>
-                                                            <td>{{ $hiring->type_of_work }}</td>
-                                                            <td>{{ $hiring->work_system }}</td>
-                                                            <td>{{date('d M Y', strtotime($hiring->created_at))}}</td>
-                                                            <td>{{date('d M Y', strtotime($hiring->deadline_hiring))}}</td>
-                                                            <td>
-                                                                <a href="{{ route('perusahaan.lowongan.editLowongan', $hiring->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                                <form method="POST" action="{{ route('perusahaan.lowongan.deleteLowongan', $hiring->id) }}" style="display:inline-block;">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Posting Lowongan -->
-                            <div id="form-container" class="form-container" style="border: 1px solid; padding: 50px; border-radius: 8px; display: none;">
+                            <div class="form-container" style="border: 1px solid; padding: 50px; border-radius: 8px">
                                 <h4 class="mb-4 text-center font-weight-bold" style="font-size:1.725rem; color: black;">Posting Lowongan</h4>
                                 <form method="POST" action="{{route('perusahaan.lowongan.addLowongan')}}">
                                     @csrf
@@ -131,8 +87,6 @@
                                     <button type="submit" class="btn btn-primary d-block mx-auto mt-10">Buat Lowongan</button>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -141,23 +95,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    function showForm(section) {
-        const listContainer = document.getElementById('list-container');
-
-        const formContainer = document.getElementById('form-container');
-
-        if (section === 'list') {
-            formContainer.style.display = 'none';
-            listContainer.style.display = 'block';
-
-        } else if (section === 'form') {
-            formContainer.style.display = 'block';
-            listContainer.style.display = 'none';
-        }
-    }
-</script>
-
-@endpush

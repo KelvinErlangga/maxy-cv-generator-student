@@ -47,6 +47,42 @@
         </div>
     </div>
 </div>
+
+<!-- Modal for Job Application -->
+<div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="applicationModalLabel">Kirim Lamaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('pelamar.dashboard.lowongan.kirim_lamaran')}}" method="POST" enctype="multipart/form-data" onsubmit="console.log('Form dikirim'); return true;">
+                    @csrf
+                    <input type="hidden" id="hiring_id" name="hiring_id">
+                    <div class="form-group">
+                        <label for="file_applicant">Unggah CV</label>
+                        <input
+                            type="file"
+                            class="form-control-file @error('file_applicant') is-invalid @enderror"
+                            id="file_applicant"
+                            name="file_applicant"
+                            required>
+                        <p>*png, jpg, jpeg, pdf</p>
+                        @error('file_applicant')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -56,23 +92,42 @@
             .then(response => response.json())
             .then(job => {
                 const jobDetailContainer = document.getElementById("job-detail");
-                jobDetailContainer.innerHTML = `
+                let actionButton = '';
 
-            <h5 class="font-weight-bold pl-4 pr-4 pt-4">${job.position_hiring} - ${job.company_name}</h5>
-            <div class="row mt-3 pl-4 pr-4">
-                <div class="col-md-9">
-                <ul class="list-unstyled mb-4">
-                    <li><i class="fas fa-map-marker-alt mr-2"></i><strong>Lokasi:</strong> ${job.address_hiring}</li>
-                    <li><i class="fas fa-briefcase mr-2"></i><strong>Posisi:</strong> ${job.position_hiring}</li>
-                    <li><i class="fas fa-clock mr-2"></i><strong>Jenis:</strong> ${job.type_of_work}</li>
-                    <li><i class="fas fa-money-bill-wave mr-2"></i><strong>Gaji:</strong> Rp ${new Intl.NumberFormat('id-ID').format(job.gaji)}</li>
-                </ul>
-                <p><strong>Deskripsi Pekerjaan:</strong></p>
-                <p class="text-justify">${job.description_hiring}</p>
+                if (job.is_closed) {
+                    // Jika lowongan sudah ditutup
+                    actionButton = `<p class="text-danger mt-3">Lowongan Ditutup</p>`;
+                } else if (job.has_applied) {
+                    // Jika user sudah melamar
+                    actionButton = `<p class="text-success mt-3">Sudah Melamar</p>`;
+                } else {
+                    // Jika lowongan masih dibuka dan user belum melamar
+                    actionButton = `<button type="button" class="btn btn-primary d-block mt-10" onclick="openApplicationModal('${job.id}')">Kirim Lamaran</button>`;
+                }
+
+                jobDetailContainer.innerHTML = `
+                <h5 class="font-weight-bold pl-4 pr-4 pt-4">${job.position_hiring} - ${job.company_name}</h5>
+                <div class="row mt-3 pl-4 pr-4">
+                    <div class="col-md-9">
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fas fa-map-marker-alt mr-2"></i><strong>Lokasi:</strong> ${job.address_hiring}</li>
+                            <li><i class="fas fa-briefcase mr-2"></i><strong>Posisi:</strong> ${job.position_hiring}</li>
+                            <li><i class="fas fa-clock mr-2"></i><strong>Jenis:</strong> ${job.type_of_work}</li>
+                            <li><i class="fas fa-money-bill-wave mr-2"></i><strong>Gaji:</strong> Rp ${new Intl.NumberFormat('id-ID').format(job.gaji)}</li>
+                            <li><i class="fas fa-clock mr-2"></i><strong>Batas Waktu:</strong> ${new Date(job.deadline_hiring).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}</li>
+                        </ul>
+                        <p><strong>Deskripsi Pekerjaan:</strong></p>
+                        <p class="text-justify">${job.description_hiring}</p>
+                    </div>
                 </div>
-            </div>
-                <button type="submit" class="btn btn-primary d-block mt-10">Kirim Lamaran</button>`;
+                ${actionButton}`;
             });
+    }
+
+
+    function openApplicationModal(jobId) {
+        document.getElementById('hiring_id').value = jobId;
+        $('#applicationModal').modal('show');
     }
 </script>
 @endpush

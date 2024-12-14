@@ -41,7 +41,6 @@
                         </button>
                         <div id="cv-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
                             <a href="{{route('pelamar.curriculum_vitae.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate CV</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template CV</a>
                         </div>
                     </div>
 
@@ -55,7 +54,6 @@
                         </button>
                         <div id="cl-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
                             <a href="{{route('pelamar.cover_letter.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Generate Cover Letter</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Template Cover Letter</a>
                         </div>
                     </div>
 

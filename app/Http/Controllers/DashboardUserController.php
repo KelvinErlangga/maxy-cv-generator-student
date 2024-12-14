@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddSubmitAplicationRequest;
+use App\Models\Applicant;
 use App\Models\CoverLetterUser;
 use App\Models\CurriculumVitaeUser;
 use App\Models\Hiring;
@@ -16,7 +18,11 @@ class DashboardUserController extends Controller
     {
         $hirings = Hiring::with('personalCompany')->get();
 
-        return view('pelamar.dashboard.dashboard_user', compact('hirings'));
+        $pending = Applicant::where('status', 'Pending')->count();
+        $diterima = Applicant::where('status', 'Diterima')->count();
+        $ditolak = Applicant::where('status', 'Ditolak')->count();
+
+        return view('pelamar.dashboard.dashboard_user', compact('hirings', 'pending', 'diterima', 'ditolak'));
     }
 
     // lowongan
@@ -29,19 +35,49 @@ class DashboardUserController extends Controller
 
     public function getShowLowongan($id)
     {
+        $user = Auth::user();
         $hiring = Hiring::with('personalCompany')->findOrFail($id);
 
+        // Periksa apakah user sudah melamar
+        $hasApplied = $user->applicants()->where('hiring_id', $id)->exists();
+
+        // Periksa apakah deadline sudah lewat
+        $isClosed = now()->greaterThan($hiring->deadline_hiring);
+
         return response()->json([
+            'id' => $hiring->id,
             'position_hiring' => $hiring->position_hiring,
             'address_hiring' => $hiring->address_hiring,
             'type_of_work' => $hiring->type_of_work,
+            'deadline_hiring' => $hiring->deadline_hiring,
             'gaji' => $hiring->gaji,
             'description_hiring' => $hiring->description_hiring,
             'company_name' => $hiring->personalCompany->name_company ?? 'Tidak Ada Nama Perusahaan',
+            'has_applied' => $hasApplied,
+            'is_closed' => $isClosed, // Kirim status apakah lowongan sudah ditutup
         ]);
+    }
 
-        // Kirim data ke view
-        return response()->json($hiring);
+    public function submitApplication(AddSubmitAplicationRequest $request)
+    {
+        $user = Auth::user();
+
+        DB::transaction(function () use ($request, $user) {
+
+            $validated = $request->validated();
+
+            if ($request->hasFile('file_applicant')) {
+                $file_applicantPath = $request->file('file_applicant')->store('applicants', 'public');
+                $validated['file_applicant'] = $file_applicantPath;
+            }
+
+            $validated['user_id'] = $user->id;
+            $validated['status'] = 'Pending';
+
+            $newAplicant = Applicant::create($validated);
+        });
+
+        return redirect()->route('pelamar.dashboard.index');
     }
 
     // Curriculum Vitae

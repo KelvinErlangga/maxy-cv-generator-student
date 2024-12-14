@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Berkas Diproses</div>
-                            <div class="h2 mb-0 font-weight-bold text-gray-800">10</div>
+                            <div class="h2 mb-0 font-weight-bold text-gray-800">{{$pending}}</div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Berkas Ditolak</div>
-                            <div class="h2 mb-0 font-weight-bold text-gray-800">12</div>
+                            <div class="h2 mb-0 font-weight-bold text-gray-800">{{$ditolak}}</div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Berkas Diterima</div>
-                            <div class="h2 mb-0 font-weight-bold text-gray-800">20</div>
+                            <div class="h2 mb-0 font-weight-bold text-gray-800">{{$diterima}}</div>
                         </div>
                     </div>
                 </div>

@@ -215,6 +215,10 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::get('/dashboard-user/lowongan/{id}', [DashboardUserController::class, 'getShowLowongan'])
             ->name('pelamar.dashboard.lowongan.show');
 
+        // dashboard user kirim lamaran
+        Route::post('/dashboard-user/lowongan/kirim-lamaran', [DashboardUserController::class, 'submitApplication'])
+            ->name('pelamar.dashboard.lowongan.kirim_lamaran');
+
         // dashboard user cv
         Route::get('/dashboard-user/curriculum-vitae', [DashboardUserController::class, 'getCurriculumVitae'])
             ->name('pelamar.dashboard.curriculum_vitae.index');
@@ -240,6 +244,15 @@ Route::middleware('auth', 'verified')->group(function () {
 
         Route::post('/dashboard-perusahaan/lowongan', [DashboardCompanyController::class, 'addLowongan'])
             ->name('perusahaan.lowongan.addLowongan');
+
+        Route::get('/dashboard-perusahaan/lowongan/edit/{hiring}', [DashboardCompanyController::class, 'editLowongan'])
+            ->name('perusahaan.lowongan.editLowongan');
+
+        Route::put('/dashboard-perusahaan/lowongan/edit/{hiring}', [DashboardCompanyController::class, 'updateLowongan'])
+            ->name('perusahaan.lowongan.updateLowongan');
+
+        Route::delete('/dashboard-perusahaan/lowongan/{hiring}', [DashboardCompanyController::class, 'deleteLowongan'])
+            ->name('perusahaan.lowongan.deleteLowongan');
 
         Route::get('/dashboard-perusahaan/kandidat', [DashboardCompanyController::class, 'getKandidat'])
             ->name('perusahaan.kandidat.index');

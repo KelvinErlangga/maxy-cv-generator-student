@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddHiringRequest;
+use App\Models\Applicant;
+use App\Models\Hiring;
 use App\Models\PersonalCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,12 +19,42 @@ class DashboardCompanyController extends Controller
 
         $personalCompany = $user->personalCompany;
 
-        return view('perusahaan.dashboard_perusahaan', compact('personalCompany'));
+        $applicants = Applicant::with(['user', 'hiring'])->get();
+
+        $applicantCount = Applicant::all()->count();
+
+        $hiring = Hiring::all()->count();
+
+        return view('perusahaan.dashboard_perusahaan', compact('personalCompany', 'applicants', 'applicantCount', 'hiring'));
     }
 
     public function getLowongan()
     {
-        return view('perusahaan.lowongan.index');
+        $user = Auth::user();
+
+        $personalCompany = $user->personalCompany; // Mengambil data perusahaan dari user
+
+        if ($personalCompany) {
+            $hirings = $personalCompany->hirings; // Ambil data lowongan dari perusahaan
+        } else {
+            $hirings = collect(); // Kosongkan jika user tidak memiliki perusahaan
+        }
+
+        return view('perusahaan.lowongan.index', compact('hirings'));
+    }
+
+    public function editLowongan(Hiring $hiring)
+    {
+        return view('perusahaan.lowongan.edit', compact('hiring'));
+    }
+
+    public function deleteLowongan(Hiring $hiring)
+    {
+        DB::transaction(function () use ($hiring) {
+            $hiring->delete();
+        });
+
+        return redirect()->route('perusahaan.lowongan.index');
     }
 
     public function addLowongan(AddHiringRequest $request)
@@ -40,8 +72,21 @@ class DashboardCompanyController extends Controller
         return redirect()->route('perusahaan.lowongan.index');
     }
 
+    public function updateLowongan(AddHiringRequest $request, Hiring $hiring)
+    {
+        DB::transaction(function () use ($request, $hiring) {
+            $validated = $request->validated();
+
+            $hiring->update($validated);
+        });
+
+        return redirect()->route('perusahaan.lowongan.index');
+    }
+
     public function getKandidat()
     {
-        return view('perusahaan.kandidat.index');
+        $applicants = Applicant::with(['user', 'hiring'])->get();
+
+        return view('perusahaan.kandidat.index', compact('applicants'));
     }
 }

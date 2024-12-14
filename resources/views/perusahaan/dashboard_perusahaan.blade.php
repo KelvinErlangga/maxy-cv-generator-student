@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Kandidat Pelamar</div>
-                                    <div class="h2 mb-0 font-weight-bold text-gray-800">120</div>
+                                    <div class="h2 mb-0 font-weight-bold text-gray-800">{{$applicantCount}}</div>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Lowongan Aktif</div>
-                                    <div class="h2 mb-0 font-weight-bold text-gray-800">10</div>
+                                    <div class="h2 mb-0 font-weight-bold text-gray-800">{{$hiring}}</div>
                                 </div>
                             </div>
                         </div>
@@ -70,36 +70,25 @@
                                         <tr>
                                             <th>Nama Kandidat</th>
                                             <th>Posisi Dilamar</th>
-                                            <th>Pendidikan</th>
                                             <th>Jenis Kelamin</th>
+                                            <th>email</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse($applicants as $applicant)
                                         <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                                    <span>Kelvin Erlangga</span>
-                                                </div>
-                                            </td>
-                                            <td>Senior Sysadmin Linux</td>
-                                            <td>S1 Networking</td>
-                                            <td>Laki - Laki</td>
+                                            <td>{{$applicant->user->name}}</td>
+                                            <td>{{$applicant->hiring->position_hiring}}</td>
+                                            <td>{{$applicant->user->personalPelamar->gender}}</td>
+                                            <td>{{$applicant->user->email}}</td>
                                             <td><button class="btn btn-primary btn-sm">Selengkapnya</button></td>
                                         </tr>
+                                        @empty
                                         <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{asset('assets/dashboard/informasi.png')}}" alt="Foto" class="rounded-circle mr-2" style="width: 30px; height: 30px" />
-                                                    <span>Abrar</span>
-                                                </div>
-                                            </td>
-                                            <td>Senior Sysadmin Linux</td>
-                                            <td>S1 Networking</td>
-                                            <td>Laki - Laki</td>
-                                            <td><button class="btn btn-primary btn-sm">Selengkapnya</button></td>
+                                            <td colspan="5">Tidak ada pelamar</td>
                                         </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
