@@ -43,15 +43,15 @@
 
         <div class="main-container">
             @forelse($templateCoverLetter as $templateCL)
-            <form method="POST" action="{{route('pelamar.cover_letter.store')}}" enctype="multipart/form-data">
-                @csrf
-                <div class="container">
-                    <img src="{{Storage::url($templateCL->thumbnail_cover_letter)}}" alt="Template CL 1" />
-                    <input type="hidden" name="template_cover_letter_id" id="template_cover_letter_id" value="{{$templateCL->id}}">
-                    <button type="submit" class="choose-template-btn">Pilih Template</button>
-                    <div class="template-name">{{$templateCL->template_cover_letter_name}}</div>
-                </div>
-            </form>
+            <!-- <form method="POST" action="{{route('pelamar.cover_letter.store')}}" enctype="multipart/form-data"> -->
+            @csrf
+            <div class="container">
+                <img src="{{Storage::url($templateCL->thumbnail_cover_letter)}}" alt="Template CL 1" />
+                <input type="hidden" name="template_cover_letter_id" id="template_cover_letter_id" value="{{$templateCL->id}}">
+                <button class="choose-template-btn">Pilih Template</button>
+                <div class="template-name">{{$templateCL->template_cover_letter_name}}</div>
+            </div>
+            <!-- </form> -->
             @empty
             <div class="container">
                 <div class="template-name">Tidak ada template</div>

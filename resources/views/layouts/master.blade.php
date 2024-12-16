@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 
-    <link rel="icon" href="{{asset('assets/homepage/logo.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
 
     @stack('style')
 
@@ -66,9 +66,9 @@
                             </svg>
                         </button>
                         <div id="about-dropdown-menu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 z-50 w-full text-center">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kami</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kontak</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">QNA</a>
+                            <a href="{{route('tentang-kami')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kami</a>
+                            <a href="{{route('kontak')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kontak</a>
+                            <a href="{{route('tanya-jawab')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">QNA</a>
                         </div>
                     </div>
                 </div>
@@ -118,9 +118,8 @@
                 <div>
                     <h3 class="text-xl font-bold text-blue-600 mb-5">GENERATE</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Template</a></li>
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Curriculum Vitae</a></li>
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Cover Letter</a></li>
+                        <li><a href="{{route('pelamar.curriculum_vitae.index')}}" class="text-gray-800 hover:text-blue-600">Curriculum Vitae</a></li>
+                        <li><a href="{{route('pelamar.cover_letter.index')}}" class="text-gray-800 hover:text-blue-600">Cover Letter</a></li>
                     </ul>
                 </div>
 
@@ -128,9 +127,8 @@
                 <div>
                     <h3 class="text-xl font-bold text-blue-600 mb-5">TENTANG</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Tentang Kami</a></li>
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Partnership</a></li>
-                        <li><a href="#" class="text-gray-800 hover:text-blue-600">Kontak Kami</a></li>
+                        <li><a href="{{route('tentang-kami')}}" class="text-gray-800 hover:text-blue-600">Tentang Kami</a></li>
+                        <li><a href="{{route('kontak')}}" class="text-gray-800 hover:text-blue-600">Kontak Kami</a></li>
                     </ul>
                 </div>
 

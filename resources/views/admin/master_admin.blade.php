@@ -12,7 +12,7 @@
 
     <title>@yield('title')</title>
 
-    <link rel="icon" href="{{asset('assets/homepage/logo.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

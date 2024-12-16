@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prestasi | CVRE GENERATE</title>
     <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

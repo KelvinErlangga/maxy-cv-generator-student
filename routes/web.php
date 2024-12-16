@@ -32,6 +32,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/tentang-kami', function () {
+    return view('kami');
+})->name('tentang-kami');
+
+Route::get('/tanya-jawab', function () {
+    return view('faq');
+})->name('tanya-jawab');
+
+Route::get('/kontak', function () {
+    return view('kontak');
+})->name('kontak');
+
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 

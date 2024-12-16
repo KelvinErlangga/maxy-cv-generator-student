@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengalaman Organisasi | CVRE GENERATE</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
+
 </head>
 
 <body class="min-h-screen bg-gradient-to-b from-white via-purple-50 to-blue-50" style="font-family: 'Poppins', sans-serif">
@@ -17,8 +19,8 @@
         <img src="{{asset('assets/images/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
 
         <!-- Back Button -->
-        <div class="absolute top-10 left-40 z-10">
-            <a href="#pengalaman_organisasi" class="text-blue-700 hover:underline text-sm flex items-center">
+        <div class="absolute top-10 left-40 z-30">
+            <a href="{{route('pelamar.curriculum_vitae.skill.index', $curriculumVitaeUser->id)}}" class="text-blue-700 hover:underline text-sm flex items-center">
                 <svg class="w-10 h-10 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>

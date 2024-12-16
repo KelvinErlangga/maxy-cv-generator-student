@@ -11,6 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Import font Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
+
 </head>
 
 <body class="min-h-screen flex flex-col relative bg-gradient-to-b from-white via-purple-50 to-blue-50" style="font-family: 'Poppins', sans-serif">
@@ -19,7 +21,7 @@
 
     <!-- Back Button -->
     <div class="absolute top-10 left-40 z-30">
-        <a href="#" class="text-blue-700 hover:underline text-sm flex items-center">
+        <a href="{{route('pelamar.curriculum_vitae.index')}}" class="text-blue-700 hover:underline text-sm flex items-center">
             <svg class="w-10 h-10 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
             </svg>

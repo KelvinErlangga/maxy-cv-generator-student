@@ -7,6 +7,9 @@
     <title>Pilih Template CV | CVRE GENERATE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
+
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
 </head>
 
@@ -16,7 +19,7 @@
 
     <!-- Back Button -->
     <div class="back-button">
-        <a href="#">
+        <a href="{{route('welcome')}}">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
