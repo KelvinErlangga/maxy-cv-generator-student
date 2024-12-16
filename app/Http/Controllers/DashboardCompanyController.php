@@ -89,4 +89,32 @@ class DashboardCompanyController extends Controller
 
         return view('perusahaan.kandidat.index', compact('applicants'));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        // Validasi request
+        $request->validate([
+            'status' => 'required|in:Pending,Diterima,Ditolak',
+        ]);
+
+        // Cari kandidat berdasarkan ID
+        $applicant = Applicant::find($id);
+
+        // Update status
+        $applicant->status = $request->status;
+        $applicant->save();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('perusahaan.kandidat.index');
+    }
+
+
+    public function deleteKandidat(Applicant $applicant)
+    {
+        DB::transaction(function () use ($applicant) {
+            $applicant->delete();
+        });
+
+        return redirect()->route('perusahaan.kandidat.index');
+    }
 }

@@ -268,6 +268,10 @@ Route::middleware('auth', 'verified')->group(function () {
 
         Route::get('/dashboard-perusahaan/kandidat', [DashboardCompanyController::class, 'getKandidat'])
             ->name('perusahaan.kandidat.index');
+
+        Route::post('/dashboard-perusahaan/kandidat/{id}/update-status', [DashboardCompanyController::class, 'updateStatus'])->name('perusahaan.kandidat.updateStatus');
+
+        Route::delete('/dashboard-perusahaan/kandidat/{applicant}/delete-kandidat', [DashboardCompanyController::class, 'deleteKandidat'])->name('perusahaan.kandidat.deleteKandidat');
     });
 
 
