@@ -55,7 +55,7 @@
                                             <input type="hidden" name="template_curriculum_vitae_id" id="template_curriculum_vitae_id" value="{{$cv->templateCV->id}}">
 
                                             <button class="btn btn-danger">
-                                                Edit Template
+                                                Edit CV
                                             </button>
                                         </form>
 
@@ -63,7 +63,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger">
-                                                Hapus Template
+                                                Hapus CV
                                             </button>
                                         </form>
                                     </div>

@@ -50,7 +50,7 @@
                                         <span>{{$cl->templateCL->template_cover_letter_name}}</span>
                                     </div>
                                     <div class="hover-buttons">
-                                        <a href="#" class="btn btn-primary">Edit Template</a>
+                                        <a href="#" class="btn btn-primary">Edit Cover Letter</a>
 
                                     </div>
                                 </div>

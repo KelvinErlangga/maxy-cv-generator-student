@@ -38,6 +38,22 @@
             <div class="line"></div>
 
             <div class="circle pending">3</div>
+
+            <div class="line"></div>
+
+            <div class="circle pending">4</div>
+
+            <div class="line"></div>
+
+            <div class="circle pending">5</div>
+
+            <div class="line"></div>
+
+            <div class="circle pending">6</div>
+
+            <div class="line"></div>
+
+            <div class="circle pending">7</div>
         </div>
     </div>
 

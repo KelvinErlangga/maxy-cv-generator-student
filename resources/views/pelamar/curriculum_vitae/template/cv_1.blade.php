@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Template CV</title>
+    <title>Preview CV | CVRE GENERATE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/editor.css')}}" />
@@ -74,18 +74,20 @@
                 <div class="left-panel">
                     <!-- Profile Section -->
                     @if($personalCurriculumVitae)
-                    <div class="profile-section">
-                        @if($personalCurriculumVitae->avatar_curriculum_vitae)
-                        <div class="profile-img">
-                            <img src="{{Storage::url($personalCurriculumVitae->avatar_curriculum_vitae)}}" alt="foto">
-                        </div>
-                        @endif
-                        <div class="profile-info">
-                            <p class="name">{{$personalCurriculumVitae->first_name_curriculum_vitae}} {{$personalCurriculumVitae->last_name_curriculum_vitae}}</p>
-                            <!-- <p class="role">Frontend Developer</p> -->
-                        </div>
-                    </div>
+                    <a href="{{route('pelamar.curriculum_vitae.profile.index', $curriculumVitaeUser->id)}}">
 
+                        <div class="profile-section">
+                            @if($personalCurriculumVitae->avatar_curriculum_vitae)
+                            <div class="profile-img">
+                                <img src="{{Storage::url($personalCurriculumVitae->avatar_curriculum_vitae)}}" alt="foto">
+                            </div>
+                            @endif
+                            <div class="profile-info">
+                                <p class="name">{{$personalCurriculumVitae->first_name_curriculum_vitae}} {{$personalCurriculumVitae->last_name_curriculum_vitae}}</p>
+                                <!-- <p class="role">Frontend Developer</p> -->
+                            </div>
+                        </div>
+                    </a>
                     <!-- Details Section -->
                     <div class="details-section">
                         <p class="details-title">Details</p>
@@ -105,9 +107,11 @@
                     @endif
 
                     <!-- Links Section -->
-                    @if($curriculumVitaeUser->links)
+                    @if($curriculumVitaeUser->links->isNotEmpty())
                     <div class="links-section">
-                        <p class="links-title">Links</p>
+                        <a href="{{route('pelamar.curriculum_vitae.social_media.index', $curriculumVitaeUser->id)}}">
+                            <p class="links-title">Links</p>
+                        </a>
                         <div class="link-item">
                             @foreach($curriculumVitaeUser->links as $link)
                             <a href="{{$link->url}}">
@@ -119,15 +123,17 @@
                     @endif
 
                     <!-- Skills Section -->
-                    @if($curriculumVitaeUser->skills)
+                    @if($curriculumVitaeUser->skills->isNotEmpty())
                     <div class="skills-section">
-                        <p class="skills-title">Skills</p>
-                        @foreach($curriculumVitaeUser->skills as $skill)
-                        <div class="skill-item">
-                            <p class="sub-menu">{{$skill->skill_name}}</p>
-                            <div class="skill-divider"></div>
-                        </div>
-                        @endforeach
+                        <a href="{{route('pelamar.curriculum_vitae.skill.index', $curriculumVitaeUser->id)}}">
+                            <p class="skills-title">Skills</p>
+                            @foreach($curriculumVitaeUser->skills as $skill)
+                            <div class="skill-item">
+                                <p class="sub-menu">{{$skill->skill_name}}</p>
+                                <div class="skill-divider"></div>
+                            </div>
+                            @endforeach
+                        </a>
                     </div>
                     @endif
                 </div>
@@ -136,14 +142,16 @@
                 <div class="right-panel">
                     @if($personalCurriculumVitae->personal_summary)
                     <div>
-                        <h1>Profile</h1>
-                        <p>
-                            {{$personalCurriculumVitae->personal_summary}}
-                        </p>
+                        <a href="{{route('pelamar.curriculum_vitae.profile.index', $curriculumVitaeUser->id)}}">
+                            <h1 style="color: black;">Profile</h1>
+                            <p style="color: black;">
+                                {{$personalCurriculumVitae->personal_summary}}
+                            </p>
+                        </a>
                     </div>
                     @endif
 
-                    @if($curriculumVitaeUser->experiences)
+                    @if($curriculumVitaeUser->experiences->isNotEmpty())
                     <div>
                         <h1>Experience</h1>
                         @foreach($curriculumVitaeUser->experiences as $experience)
@@ -165,7 +173,7 @@
                     </div>
                     @endif
 
-                    @if($curriculumVitaeUser->educations)
+                    @if($curriculumVitaeUser->educations->isNotEmpty())
                     <div>
                         <h1>Education</h1>
                         @foreach($curriculumVitaeUser->educations as $education)
@@ -181,7 +189,7 @@
                     </div>
                     @endif
 
-                    @if($curriculumVitaeUser->languages)
+                    @if($curriculumVitaeUser->languages->isNotEmpty())
                     <div>
                         <h1>Languages</h1>
                         @foreach($curriculumVitaeUser->languages as $language)

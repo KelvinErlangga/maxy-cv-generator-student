@@ -71,6 +71,9 @@ class CurriculumVitaeUserController extends Controller
     public function addProfile(AddUpdateProfileCurriculumVitaeRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
     {
         DB::transaction(function () use ($request, $curriculumVitaeUser) {
+
+            $existingAvatar = optional($curriculumVitaeUser->personalCurriculumVitae)->avatar_curriculum_vitae;
+
             $curriculumVitaeUser->personalCurriculumVitae()->delete();
 
             $validated = $request->validated();
@@ -78,6 +81,9 @@ class CurriculumVitaeUserController extends Controller
             if ($request->hasFile('avatar_curriculum_vitae')) {
                 $avatar_curriculum_vitaePath = $request->file('avatar_curriculum_vitae')->store('avatar_curriculum_vitae', 'public');
                 $validated['avatar_curriculum_vitae'] = $avatar_curriculum_vitaePath;
+            } else {
+                // Jika tidak ada file baru, gunakan avatar yang sudah ada
+                $validated['avatar_curriculum_vitae'] = $existingAvatar;
             }
 
             $curriculumVitaeUser->personalCurriculumVitae()->create($validated);

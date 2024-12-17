@@ -167,7 +167,11 @@ body {
   color: #fafafa;
   font-size: 14px;
   font-weight: bold;
-  line-height: 4px;
+  line-height: 20px; /* Sesuaikan line-height untuk spacing */
+  word-wrap: break-word; /* Memastikan teks panjang dapat terpotong */
+  word-break: break-word; /* Memastikan kata panjang terpotong jika perlu */
+  white-space: normal; /* Izinkan teks untuk membungkus ke baris baru */
+  max-width: 100%; /* Pastikan teks tidak melewati batas kontainer */
 }
 
 .profile-info .role {

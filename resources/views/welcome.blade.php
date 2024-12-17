@@ -364,7 +364,7 @@
                 crossFade: true
             },
             autoplay: {
-                delay: 4000,
+                delay: 10000,
                 disableOnInteraction: false, // Tetap autoplay meskipun disentuh
             },
             loop: true,

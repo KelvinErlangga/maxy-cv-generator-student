@@ -79,7 +79,7 @@ class DashboardUserController extends Controller
             $newAplicant = Applicant::create($validated);
         });
 
-        return redirect()->route('pelamar.dashboard.index');
+        return redirect()->route('pelamar.dashboard.lowongan.index');
     }
 
     // Curriculum Vitae

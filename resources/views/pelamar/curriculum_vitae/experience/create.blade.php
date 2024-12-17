@@ -19,128 +19,120 @@
     <img src="{{asset('assets/images/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
 
     <!-- Back Button -->
-    <div class="absolute top-10 left-40 z-30">
-        <a href="#" class="text-blue-700 hover:underline text-sm flex items-center">
+    <div class="absolute top-10 left-10 z-50">
+        <a href="{{route('pelamar.curriculum_vitae.experience.index', $curriculumVitaeUser->id)}}" class="text-blue-700 hover:underline text-sm flex items-center">
             <svg class="w-10 h-10 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
             </svg>
         </a>
     </div>
 
     <!-- Stepper -->
-    <div class="flex justify-center mt-8 mb-20 relative z-20">
-        <div class="flex items-center">
-            <!-- Step 1: Check Icon -->
-            <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white font-bold">
-                <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
+    <div class="absolute top-10 left-0 right-0 z-30 flex justify-center">
+        <div class="flex items-center space-x-4 overflow-x-auto">
+            <!-- Step 1 -->
+            <div class="flex items-center space-x-4">
             </div>
-            <div class="w-28 h-px bg-blue-700"></div>
-
-            <!-- Step 2: Current Step -->
-            <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white text-3xl">
-                2
-            </div>
-            <div class="w-28 h-px bg-blue-700"></div>
-
-            <!-- Step 3 -->
-            <div class="flex justify-center items-center w-14 h-14 rounded-full bg-gray-300 text-gray-700 text-3xl">
-                3
+            <!-- Steps 2 to 7 -->
+            <div class="flex items-center space-x-4">
             </div>
         </div>
     </div>
 
     <!-- Form Container -->
-    <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20" style="max-width: 800px; width: 100%;">
+    <div class="flex flex-col items-center justify-center z-10 mt-32 mb-20">
+        <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20" style="max-width: 800px; width: 100%;">
 
-        <!-- Form Title -->
-        <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Kerja</h2>
+            <!-- Form Title -->
+            <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Kerja</h2>
 
-        <!-- Form -->
-        <form method="POST" action="{{route('pelamar.curriculum_vitae.experience.addExperience', $curriculumVitaeUser->id)}}" enctype="multipart/form-data">
-            @csrf
-            <div class="grid grid-cols-4 gap-4">
-                <!-- Posisi Kerja -->
-                <div class="col-span-2">
-                    <input
-                        id="position_experience"
-                        type="text"
-                        name="position_experience"
-                        placeholder="Posisi Kerja"
-                        value="{{old('position_experience')}}"
-                        class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                        style="height: 45px; padding: 0 16px"
-                        required />
+            <!-- Form -->
+            <form method="POST" action="{{route('pelamar.curriculum_vitae.experience.addExperience', $curriculumVitaeUser->id)}}" enctype="multipart/form-data">
+                @csrf
+                <div class="grid grid-cols-4 gap-4">
+                    <!-- Posisi Kerja -->
+                    <div class="col-span-2">
+                        <input
+                            id="position_experience"
+                            type="text"
+                            name="position_experience"
+                            placeholder="Posisi Kerja"
+                            value="{{old('position_experience')}}"
+                            class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                            style="height: 45px; padding: 0 16px"
+                            required />
+                    </div>
+                    <!-- Kota -->
+                    <div class="col-span-2">
+                        <input
+                            id="city_experience"
+                            type="text"
+                            name="city_experience"
+                            placeholder="Kota"
+                            value="{{old('city_experience')}}"
+                            class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                            style="height: 45px; padding: 0 16px"
+                            required />
+                    </div>
+                    <!-- Pemberi Kerja/Perusahaan -->
+                    <div class="col-span-4">
+                        <input
+                            id="company_experience"
+                            type="text"
+                            name="company_experience"
+                            value="{{old('company_experience')}}"
+                            placeholder="Pemberi Kerja/Perusahaan"
+                            class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                            style="height: 45px; padding: 0 16px"
+                            required />
+                    </div>
+                    <!-- Tanggal Mulai -->
+                    <div class="col-span-2">
+                        <label for="start_date" class="block text-sm text-gray-500">Tanggal Mulai</label>
+                        <input
+                            id="start_date"
+                            type="date"
+                            name="start_date"
+                            class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                            style="height: 45px; padding: 0 16px"
+                            required />
+                    </div>
+                    <!-- Tanggal Selesai -->
+                    <div class="col-span-2">
+                        <label for="end_date" class="block text-sm text-gray-500">Tanggal Selesai</label>
+                        <input
+                            id="end_date"
+                            type="date"
+                            name="end_date"
+                            class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
+                            style="height: 45px; padding: 0 16px" />
+                    </div>
+                    <!-- Masih Bekerja -->
+                    <div class="flex items-center col-span-4">
+                        <input
+                            id="masih_bekerja"
+                            type="checkbox"
+                            name="masih_bekerja"
+                            class="mr-2"
+                            onclick="toggleEndDate()" />
+                        <label for="masih_bekerja" class="text-sm text-gray-400">Masih bekerja di sini</label>
+                    </div>
+                    <!-- Ringkasan -->
+                    <div class="col-span-4">
+                        <!-- Quill Editor -->
+                        <div id="editor" class="bg-white rounded border border-gray-300" style="height: 150px;"></div>
+                        <input type="hidden" id="description_experience" name="description_experience">
+                    </div>
                 </div>
-                <!-- Kota -->
-                <div class="col-span-2">
-                    <input
-                        id="city_experience"
-                        type="text"
-                        name="city_experience"
-                        placeholder="Kota"
-                        value="{{old('city_experience')}}"
-                        class="block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                        style="height: 45px; padding: 0 16px"
-                        required />
-                </div>
-                <!-- Pemberi Kerja/Perusahaan -->
-                <div class="col-span-4">
-                    <input
-                        id="company_experience"
-                        type="text"
-                        name="company_experience"
-                        value="{{old('company_experience')}}"
-                        placeholder="Pemberi Kerja/Perusahaan"
-                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                        style="height: 45px; padding: 0 16px"
-                        required />
-                </div>
-                <!-- Tanggal Mulai -->
-                <div class="col-span-2">
-                    <label for="start_date" class="block text-sm text-gray-500">Tanggal Mulai</label>
-                    <input
-                        id="start_date"
-                        type="date"
-                        name="start_date"
-                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                        style="height: 45px; padding: 0 16px"
-                        required />
-                </div>
-                <!-- Tanggal Selesai -->
-                <div class="col-span-2">
-                    <label for="end_date" class="block text-sm text-gray-500">Tanggal Selesai</label>
-                    <input
-                        id="end_date"
-                        type="date"
-                        name="end_date"
-                        class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none"
-                        style="height: 45px; padding: 0 16px" />
-                </div>
-                <!-- Masih Bekerja -->
-                <div class="flex items-center col-span-4">
-                    <input
-                        id="masih_bekerja"
-                        type="checkbox"
-                        name="masih_bekerja"
-                        class="mr-2"
-                        onclick="toggleEndDate()" />
-                    <label for="masih_bekerja" class="text-sm text-gray-400">Masih bekerja di sini</label>
-                </div>
-                <!-- Ringkasan -->
-                <div class="col-span-4">
-                    <!-- Quill Editor -->
-                    <div id="editor" class="bg-white rounded border border-gray-300" style="height: 150px;"></div>
-                    <input type="hidden" id="description_experience" name="description_experience">
-                </div>
-            </div>
 
-            <!-- Langkah Selanjutnya -->
-            <button
-                type="submit"
-                class="mt-6 w-full py-4 bg-blue-700 text-white text-sm font-medium rounded shadow hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition">
-                Langkah Selanjutnya
-            </button>
-        </form>
+                <!-- Langkah Selanjutnya -->
+                <button
+                    type="submit"
+                    class="mt-6 w-full py-4 bg-blue-700 text-white text-sm font-medium rounded shadow hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition">
+                    Submit
+                </button>
+            </form>
+        </div>
     </div>
 
     <!-- Quill.js JS -->

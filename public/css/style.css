@@ -27,10 +27,62 @@ img.background {
   pointer-events: none;
 }
 
+/* Responsif untuk Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  z-index: 20;
+  position: relative;
+}
+
+.stepper .step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stepper .circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stepper .line {
+  width: 56px;
+  height: 2px;
+  background-color: #374151;
+  margin: 0;
+}
+
+.stepper .done {
+  background-color: #2d31a6;
+  color: white;
+}
+
+.stepper .current {
+  background-color: #2d31a6;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.stepper .pending {
+  background-color: #d1d5db;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
 .back-button {
   position: absolute;
   top: 40px;
-  left: 160px;
+  left: 40px;
+  display: flex;
+  align-items: center;
   z-index: 10;
 }
 
@@ -52,50 +104,43 @@ img.background {
   margin-right: 8px;
 }
 
-.stepper {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-  z-index: 20;
-  position: relative;
+/* Responsif untuk layar kecil */
+@media screen and (max-width: 768px) {
+  .stepper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stepper .step {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stepper .line {
+    width: 40px;
+  }
+
+  .back-button {
+    left: 20px;
+  }
 }
 
-.stepper .step {
-  display: flex;
-  align-items: center;
-}
+/* Responsif untuk layar sangat kecil */
+@media screen and (max-width: 480px) {
+  .stepper .circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
 
-.stepper .circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
+  .stepper .line {
+    width: 20px;
+  }
 
-.stepper .line {
-  width: 112px;
-  height: 2px;
-  background-color: #374151;
-}
-
-.stepper .done {
-  background-color: #2d31a6;
-  color: white;
-}
-
-.stepper .current {
-  background-color: #2d31a6;
-  color: white;
-  font-size: 1.5rem;
-}
-
-.stepper .pending {
-  background-color: #d1d5db;
-  color: #374151;
-  font-size: 1.5rem;
+  .back-button svg {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 /* Wrapper (pembungkus semua container) */
