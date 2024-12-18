@@ -16,8 +16,8 @@ class CreateLanguagesTable extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
-            $table->string('language_name');
-            $table->enum('category_level', ['expert', 'beginer']);
+            $table->string('language_name')->nullable();
+            $table->enum('category_level', ['Expert', 'Beginer', 'Medium'])->nullable();
             $table->timestamps();
         });
     }

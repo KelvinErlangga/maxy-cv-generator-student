@@ -97,7 +97,7 @@
                         @endif
                     @endauth
 
-                    <a href="#" class="bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded hover:bg-blue-600">Buat CV</a>
+                    <a href="{{route('pelamar.curriculum_vitae.index')}}" class="bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded hover:bg-blue-600">Buat CV</a>
                 </div>
             </div>
         </div>

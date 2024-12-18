@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkillUsersTable extends Migration
+class CreateSocialMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateSkillUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('skill_users', function (Blueprint $table) {
+        Schema::create('social_media', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
-            $table->string('skill_name')->nullable();
-            $table->enum('category_level', ['Expert', 'Beginer', 'Medium'])->nullable();
+            $table->string('link_name')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSkillUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skill_users');
+        Schema::dropIfExists('social_media');
     }
 }

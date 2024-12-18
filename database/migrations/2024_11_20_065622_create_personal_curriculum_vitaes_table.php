@@ -16,12 +16,13 @@ class CreatePersonalCurriculumVitaesTable extends Migration
         Schema::create('personal_curriculum_vitaes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
+            $table->string('avatar_curriculum_vitae')->nullable();
             $table->string('full_name_curriculum_vitae');
             $table->string('email_curriculum_vitae');
             $table->string('phone_curriculum_vitae');
-            $table->text('address_curriculum_vitae');
-            $table->text('personal_summary');
-            $table->date('date_of_birth_curriculum_vitae');
+            $table->string('city_curriculum_vitae');
+            $table->text('address_curriculum_vitae')->nullable();
+            $table->text('personal_summary')->nullable();
             $table->timestamps();
         });
     }

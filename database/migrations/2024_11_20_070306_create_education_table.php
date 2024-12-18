@@ -18,8 +18,10 @@ class CreateEducationTable extends Migration
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
             $table->string('school_name');
             $table->string('field_of_study');
+            $table->string('city_education')->nullable();
+            $table->text('description_education')->nullable();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
