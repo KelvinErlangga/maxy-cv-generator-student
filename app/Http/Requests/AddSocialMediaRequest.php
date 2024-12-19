@@ -24,10 +24,10 @@ class AddSocialMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'link_name' => ['required', 'array'],
-            'link_name.*' => ['required', 'string', 'max:255'],
-            'url' => ['required', 'array'],
-            'url.*' => ['required', 'string', 'max:255']
+            'link_name' => ['nullable', 'array'],
+            'link_name.*' => ['nullable', 'string', 'max:255'],
+            'url' => ['nullable', 'array'],
+            'url.*' => ['nullable', 'string', 'max:255']
         ];
     }
 }

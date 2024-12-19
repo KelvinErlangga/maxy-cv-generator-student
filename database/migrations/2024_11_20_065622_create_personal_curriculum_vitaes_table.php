@@ -17,7 +17,8 @@ class CreatePersonalCurriculumVitaesTable extends Migration
             $table->id();
             $table->foreignId('curriculum_vitae_user_id')->constrained()->onDelete('cascade');
             $table->string('avatar_curriculum_vitae')->nullable();
-            $table->string('full_name_curriculum_vitae');
+            $table->string('first_name_curriculum_vitae');
+            $table->string('last_name_curriculum_vitae')->nullable();
             $table->string('email_curriculum_vitae');
             $table->string('phone_curriculum_vitae');
             $table->string('city_curriculum_vitae');

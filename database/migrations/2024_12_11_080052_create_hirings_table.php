@@ -17,12 +17,14 @@ class CreateHiringsTable extends Migration
             $table->id();
             $table->foreignId('personal_company_id')->constrained()->onDelete('cascade');
             $table->string('position_hiring');
-            $table->string('city_hiring');
-            $table->text('description_hiring');
-            $table->enum('type_of_work', ['Full Time', 'Part Time', 'Freelance']);
+            $table->text('address_hiring');
+            $table->string('type_of_work');
+            $table->string('work_system');
+            $table->string('pola_kerja');
+            $table->string('education_hiring');
             $table->unsignedBigInteger('gaji');
-            $table->string('contact_information');
             $table->date('deadline_hiring');
+            $table->text('description_hiring');
             $table->timestamps();
         });
     }

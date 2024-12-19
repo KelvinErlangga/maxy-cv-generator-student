@@ -20,6 +20,12 @@ class PersonalCompany extends Model
         'description_company'
     ];
 
+    // relasi dengan tabel user
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     // relasi dengan tabel hiring
     public function hirings()
     {

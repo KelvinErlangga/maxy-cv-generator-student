@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
+use App\Models\RecommendedSkill;
 use App\Models\Skill;
 use App\Models\TemplateCoverLetter;
 use App\Models\TemplateCurriculumVitae;
@@ -17,8 +19,12 @@ class DashboardAdminController extends Controller
 
         $skills = Skill::getCountSkill();
 
+        $jobs = Job::getCountJob();
+
+        $recommendedSkills = RecommendedSkill::getCountRecommendedSkill();
+
         $userPelamar = User::getCountUserPelamar();
 
-        return view('admin.dashboard_admin', compact('countTemplateCV', 'countTemplateCL', 'skills', 'userPelamar'));
+        return view('admin.dashboard_admin', compact('countTemplateCV', 'countTemplateCL', 'skills', 'userPelamar', 'jobs', 'recommendedSkills'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
@@ -37,7 +38,8 @@ class GoogleController extends Controller
                 $newUser = User::create([
                     'email' => $user->email,
                     'name' => $user->name,
-                    'google_id' => $user->id
+                    'google_id' => $user->id,
+                    'password' => Hash::make('123123123')
                 ]);
 
                 $newUser->assignRole('pelamar');

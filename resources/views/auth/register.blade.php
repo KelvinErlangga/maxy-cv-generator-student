@@ -42,7 +42,7 @@
                         </div>
                         <div class="mb-3.5">
                             <label for="tanggal-lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                            <input id="tanggal-lahir" name="date_of_birth_pelamar" type="date" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
+                            <input id="tanggal-lahir" name="date_of_birth_pelamar" value="{{old('date_of_birth_pelamar')}}" type="date" required class="mt-1 block w-full rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:outline-none p-2" />
                         </div>
                         <div class="mb-4">
                             <label for="kota-domisili" class="block text-sm font-medium text-gray-700">Kota Domisili</label>

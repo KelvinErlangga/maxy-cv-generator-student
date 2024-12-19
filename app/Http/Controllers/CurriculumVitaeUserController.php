@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddLanguageRequest;
-use App\Http\Requests\AddProfileCurriculumVitaeRequest;
 use App\Http\Requests\AddSkillRequest;
 use App\Http\Requests\AddSocialMediaRequest;
 use App\Http\Requests\AddUpdateAchievementRequest;
 use App\Http\Requests\AddUpdateEducationRequest;
 use App\Http\Requests\AddUpdateExperienceRequest;
 use App\Http\Requests\AddUpdateOrganizationRequest;
+use App\Http\Requests\AddUpdateProfileCurriculumVitaeRequest;
 use App\Http\Requests\StoreCurriculumVitaeUserRequest;
 use App\Models\Achievement;
 use App\Models\CurriculumVitaeUser;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Organization;
+use App\Models\PersonalCurriculumVitae;
 use App\Models\TemplateCurriculumVitae;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +38,23 @@ class CurriculumVitaeUserController extends Controller
     {
         $user = Auth::user();
 
+        // Validasi input
+        $validated = $request->validated();
+        $validated['user_id'] = $user->id;
+
+        $adaCVUser = CurriculumVitaeUser::findByUserIdAndTemplateId(
+            $validated['user_id'],
+            $validated['template_curriculum_vitae_id']
+        );
+
+        if ($adaCVUser) {
+            // Jika sudah ada, langsung redirect ke view selanjutnya
+            return redirect()->route('pelamar.curriculum_vitae.profile.index', $adaCVUser);
+        }
+
+        // Jika belum ada, simpan data baru
         $newCVUser = null;
-
-        DB::transaction(function () use ($request, $user, &$newCVUser) {
-            $validated = $request->validated();
-
-            $validated['user_id'] = $user->id;
-
+        DB::transaction(function () use ($validated, &$newCVUser) {
             $newCVUser = CurriculumVitaeUser::create($validated);
         });
 
@@ -57,16 +68,22 @@ class CurriculumVitaeUserController extends Controller
     }
 
     // tambah data profile kedalam database
-    public function addProfile(AddProfileCurriculumVitaeRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
+    public function addProfile(AddUpdateProfileCurriculumVitaeRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
     {
         DB::transaction(function () use ($request, $curriculumVitaeUser) {
-            $validated = $request->validated();
 
-            $validated['full_name_curriculum_vitae'] = $request->first_name . " " . $request->last_name;
+            $existingAvatar = optional($curriculumVitaeUser->personalCurriculumVitae)->avatar_curriculum_vitae;
+
+            $curriculumVitaeUser->personalCurriculumVitae()->delete();
+
+            $validated = $request->validated();
 
             if ($request->hasFile('avatar_curriculum_vitae')) {
                 $avatar_curriculum_vitaePath = $request->file('avatar_curriculum_vitae')->store('avatar_curriculum_vitae', 'public');
                 $validated['avatar_curriculum_vitae'] = $avatar_curriculum_vitaePath;
+            } else {
+                // Jika tidak ada file baru, gunakan avatar yang sudah ada
+                $validated['avatar_curriculum_vitae'] = $existingAvatar;
             }
 
             $curriculumVitaeUser->personalCurriculumVitae()->create($validated);
@@ -186,7 +203,15 @@ class CurriculumVitaeUserController extends Controller
     // tambah data bahasa ke database
     public function addLanguage(AddLanguageRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
     {
+        if (!$request->has('language_name') || empty($request->input('language_name'))) {
+            $curriculumVitaeUser->languages()->delete();
+
+            return redirect()->route('pelamar.curriculum_vitae.skill.index', $curriculumVitaeUser->id);
+        }
+
         DB::transaction(function () use ($request, $curriculumVitaeUser) {
+            $curriculumVitaeUser->languages()->delete();
+
             $validated = $request->validated();
 
             foreach ($validated['language_name'] as $index => $languageName) {
@@ -208,7 +233,15 @@ class CurriculumVitaeUserController extends Controller
     // tambah data keahlian ke database
     public function addSkill(AddSkillRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
     {
+        if (!$request->has('skill_name') || empty($request->input('skill_name'))) {
+            $curriculumVitaeUser->skills()->delete();
+
+            return redirect()->route('pelamar.curriculum_vitae.organization.index', $curriculumVitaeUser->id);
+        }
+
         DB::transaction(function () use ($request, $curriculumVitaeUser) {
+            $curriculumVitaeUser->skills()->delete();
+
             $validated = $request->validated();
 
             foreach ($validated['skill_name'] as $index => $skillName) {
@@ -333,7 +366,15 @@ class CurriculumVitaeUserController extends Controller
     // tambah data link informasi ke database
     public function addSocialMedia(AddSocialMediaRequest $request, CurriculumVitaeUser $curriculumVitaeUser)
     {
+        if (!$request->has('link_name') || empty($request->input('link_name'))) {
+            $curriculumVitaeUser->links()->delete();
+
+            return redirect()->route('pelamar.curriculum_vitae.preview.index', $curriculumVitaeUser->id);
+        }
+
         DB::transaction(function () use ($request, $curriculumVitaeUser) {
+            $curriculumVitaeUser->links()->delete();
+
             $validated = $request->validated();
 
             foreach ($validated['link_name'] as $index => $linkName) {
@@ -344,6 +385,19 @@ class CurriculumVitaeUserController extends Controller
             }
         });
 
-        return redirect()->route('pelamar.curriculum_vitae.social_media.index', $curriculumVitaeUser->id);
+        return redirect()->route('pelamar.curriculum_vitae.preview.index', $curriculumVitaeUser->id);
+    }
+
+    // tampil preview cv
+    public function previewCV(CurriculumVitaeUser $curriculumVitaeUser)
+    {
+        $templateView = 'pelamar.curriculum_vitae.template.cv_' . $curriculumVitaeUser->template_curriculum_vitae_id;
+
+        // Cek apakah view ada
+        if (!view()->exists($templateView)) {
+            $templateView = 'pelamar.curriculum_vitae.template.cv_1';
+        }
+
+        return view($templateView, compact('curriculumVitaeUser'));
     }
 }

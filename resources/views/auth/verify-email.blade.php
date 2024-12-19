@@ -1,39 +1,43 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.master')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+@section('title', 'Verifikasi Email | CVRE GENERATE')
+
+@section('content')
+<!-- Login Form -->
+<div class="min-h-screen flex items-center justify-center relative">
+    <!-- Background Image -->
+    <img src="{{asset('assets/images/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
+
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md relative z-20">
+        <!-- Logo -->
+        <div class="flex justify-center mb-6">
+            <img src="{{asset('assets/homepage/logo.png')}}" alt="Logo" class="w-44 h-auto" />
         </div>
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+        <!-- Verifikasi Email Message -->
+        <div class="text-center">
+            <h2 class="text-gray-800 font-bold text-xs mb-10 my-8">
+                Kami telah mengirim email verifikasi ke alamat
+                <span class="text-blue-600">{{Auth::user()->email}}</span>,
+                silahkan cek di spam bila perlu.
+            </h2>
+            <img src="{{asset('assets/images/verification.png')}}"
+                alt="Illustration"
+                class="w-52 h-auto mx-auto m-6" />
+
+            <!-- Teks dan Tombol di Sebaris -->
+            <div class="text-gray-600 text-sm my-8 flex items-center justify-center gap-2">
+                <span>Belum dapat email verifikasi?</span>
+                <form method="POST" action="{{ route('verification.send') }}">
+                    @csrf
+                    <button type="submit" class="text-blue-600 font-semibold hover:underline">
+                        Klik disini
+                    </button>
+                </form>
             </div>
-        @endif
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
         </div>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+</div>
+
+
+@endsection

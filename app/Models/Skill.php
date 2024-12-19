@@ -31,6 +31,11 @@ class Skill extends Model
         return $countskills;
     }
 
+    public function recommendedSkill()
+    {
+        return $this->hasMany(RecommendedSkill::class);
+    }
+
     // relasi dengan tabel skill user
     public function skillUser()
     {

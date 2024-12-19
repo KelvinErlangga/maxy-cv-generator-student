@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CurriculumVitaeUser extends Model
 {
@@ -13,6 +14,15 @@ class CurriculumVitaeUser extends Model
         'user_id',
         'template_curriculum_vitae_id'
     ];
+
+    // get all cv
+    public static function getCurriculumVitaeUser($userId)
+    {
+        $curriculumVitaes = CurriculumVitaeUser::with(['templateCV', 'user'])->where('user_id', $userId)
+            ->get();;
+
+        return $curriculumVitaes;
+    }
 
     // relasi dengan tabel user
     public function user()
@@ -24,6 +34,13 @@ class CurriculumVitaeUser extends Model
     public function templateCV()
     {
         return $this->belongsTo(TemplateCurriculumVitae::class, 'template_curriculum_vitae_id');
+    }
+
+    public static function findByUserIdAndTemplateId($userId, $templateId)
+    {
+        return self::where('user_id', $userId)
+            ->where('template_curriculum_vitae_id', $templateId)
+            ->first();
     }
 
     // relasi dengan tabel personal curriculum vitae

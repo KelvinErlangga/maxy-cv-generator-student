@@ -12,7 +12,7 @@
 
     <title>@yield('title')</title>
 
-    <link rel="icon" href="{{asset('assets/homepage/logo.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -79,9 +79,23 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.skills.index')}}">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
+                <a class="nav-link pb-0" href="{{route('admin.jobs.index')}}">
+                    <i class="fas fa-fw fa-id-badge"></i>
+                    <span>Data Pekerjaan</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link pb-0" href="{{route('admin.skills.index')}}">
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Data Keahlian</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.recommended_skills.index')}}">
+                    <i class="fas fa-fw fa-users-cog"></i>
+                    <span>Rekomendasi Keahlian</span>
                 </a>
             </li>
 

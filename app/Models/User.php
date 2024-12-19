@@ -64,13 +64,13 @@ class User extends Authenticatable implements MustVerifyEmail
     // relasi dengan tabel personal pelamar
     public function personalPelamar()
     {
-        return $this->belongsTo(PersonalPelamar::class);
+        return $this->hasOne(PersonalPelamar::class);
     }
 
     // relasi dengan table personal company
-    public function personalComapany()
+    public function personalCompany()
     {
-        return $this->belongsTo(PersonalCompany::class);
+        return $this->hasOne(PersonalCompany::class);
     }
 
     //relasi dengan tabel curriculum vitae user

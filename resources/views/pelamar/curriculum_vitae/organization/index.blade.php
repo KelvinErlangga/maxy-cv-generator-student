@@ -6,52 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengalaman Organisasi | CVRE GENERATE</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{asset('assets/icons/logo.svg')}}" type="image/x-icon">
+
 </head>
 
-<body class="min-h-screen bg-gradient-to-b from-white via-purple-50 to-blue-50" style="font-family: 'Poppins', sans-serif">
+<body class="min-h-screen flex flex-col relative bg-gradient-to-b from-white via-purple-50 to-blue-50" style="font-family: 'Poppins', sans-serif">
 
-    <!-- Form Pengalaman Organisasi -->
-    <div class="relative flex flex-col">
+    <!-- Background -->
+    <img src="{{asset('assets/images/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
 
-        <!-- Background -->
-        <img src="{{asset('assets/images/background.png')}}" alt="Background Shape" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" />
+    <!-- Back Button -->
+    <div class="absolute top-10 left-10 z-50">
+        <a href="{{route('pelamar.curriculum_vitae.skill.index', $curriculumVitaeUser->id)}}" class="text-blue-700 hover:underline text-sm flex items-center">
+            <svg class="w-10 h-10 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </a>
+    </div>
 
-        <!-- Back Button -->
-        <div class="absolute top-10 left-40 z-10">
-            <a href="#pengalaman_organisasi" class="text-blue-700 hover:underline text-sm flex items-center">
-                <svg class="w-10 h-10 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-            </a>
-        </div>
-
-        <!-- Stepper -->
-        <div class="flex justify-center mt-8 mb-20 relative z-20">
-            <div class="flex items-center">
-                <!-- Step 1: Check Icon -->
-                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white font-bold">
+    <!-- Stepper Container -->
+    <div class="absolute top-10 left-0 right-0 z-30 flex justify-center">
+        <div class="flex items-center space-x-4 overflow-x-auto">
+            <!-- Step 1 -->
+            <div class="flex items-center space-x-4">
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
                     <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
                 </div>
-                <div class="w-28 h-px bg-blue-700"></div>
-
-                <!-- Step 2: Current Step -->
-                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-blue-700 text-white text-3xl">
-                    2
+                <div class="w-14 h-px bg-blue-700"></div>
+            </div>
+            <!-- Steps 2 to 7 -->
+            <div class="flex items-center space-x-4">
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
                 </div>
-                <div class="w-28 h-px bg-blue-700"></div>
+                <div class="w-14 h-px bg-blue-700"></div>
 
-                <!-- Step 3 -->
-                <div class="flex justify-center items-center w-14 h-14 rounded-full bg-gray-300 text-gray-700 text-3xl">
-                    3
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
+                </div>
+                <div class="w-14 h-px bg-blue-700"></div>
+
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
+                </div>
+                <div class="w-14 h-px bg-blue-700"></div>
+
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
+                </div>
+                <div class="w-14 h-px bg-blue-700"></div>
+
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white font-bold">
+                    <img src="{{asset('assets/images/done.svg')}}" alt="Check Icon" class="w-6 h-6" />
+                </div>
+                <div class="w-14 h-px bg-blue-700"></div>
+
+                <div class="flex justify-center items-center w-11 h-11 rounded-full bg-blue-700 text-white text-3xl">
+                    7
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Container -->
+
+    <!-- Container -->
+    <div class="flex flex-col items-center justify-center z-10 mt-32 mb-20">
         <div class="bg-white shadow-lg rounded-lg p-8 mx-auto z-10 mb-20" style="max-width: 800px; width: 100%;">
 
             <!-- Form Title -->
-            <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Organisasi</h2>
+            <h2 class="text-2xl text-center text-blue-800 mb-8">Pengalaman Organisasi(opsional)</h2>
 
             <!-- List Pengalaman Organisasi (Dragable) -->
             <ul id="experience-list" class="space-y-4">

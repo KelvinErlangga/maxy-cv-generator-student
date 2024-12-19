@@ -24,10 +24,10 @@ class AddSkillRequest extends FormRequest
     public function rules()
     {
         return [
-            'skill_name' => ['required', 'array'],
-            'skill_name.*' => ['required', 'string', 'max:255'],
-            'level' => ['required', 'array'],
-            'level.*' => ['required', 'string', 'max:255']
+            'skill_name' => ['nullable', 'array'],
+            'skill_name.*' => ['nullable', 'string', 'max:255'],
+            'level' => ['nullable', 'array'],
+            'level.*' => ['nullable', 'string', 'max:255']
         ];
     }
 }

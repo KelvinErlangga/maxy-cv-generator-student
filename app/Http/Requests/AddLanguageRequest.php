@@ -24,10 +24,10 @@ class AddLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'language_name' => ['required', 'array'],
-            'language_name.*' => ['required', 'string', 'max:255'],
-            'level' => ['required', 'array'],
-            'level.*' => ['required', 'string', 'max:255']
+            'language_name' => ['nullable', 'array'],
+            'language_name.*' => ['nullable', 'string', 'max:255'],
+            'level' => ['nullable', 'array'],
+            'level.*' => ['nullable', 'string', 'max:255']
         ];
     }
 }
